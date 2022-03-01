@@ -2,9 +2,20 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
+    ssr: false,
+    generate: {
+        fallback: true
+    },
+    target: "static",
+
+    router: {
+
+        base: "/canabit_frontend_admin/"
+    },
+
     head: {
         titleTemplate: '%s - Admin Canabit',
-        title: 'canabit-frontend-admin',
+        title: 'canabit_frontend_admin',
         htmlAttrs: {
             lang: 'en'
         },
