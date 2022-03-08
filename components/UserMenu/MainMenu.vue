@@ -15,7 +15,7 @@
         </div>
     </v-app-bar>
 
-    <v-navigation-drawer app floating width="260" class="app-navigation-menu bg-main" :right="$vuetify.rtl" v-model="isDrawerOpen">
+    <v-navigation-drawer app floating width="260" class="app-navigation-menu bg-main shadow-2xl" :right="$vuetify.rtl" v-model="isDrawerOpen">
         <div class="vertical-nav-header d-flex items-center ps-6 pe-5 pt-5 pb-2">
             <router-link to="/" class="d-flex align-center text-decoration-none w-full">
                 <center>
@@ -104,5 +104,9 @@ export default {
     bottom: 13px;
     left: 50%;
     transform: translateX(-50%);
+}
+.bg-navb{
+    background: rgb(0,221,126);
+background: linear-gradient(90deg, rgba(0,221,126,1) 0%, rgba(0,255,217,1) 100%);
 }
 </style>
