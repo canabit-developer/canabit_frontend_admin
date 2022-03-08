@@ -11,7 +11,7 @@
             <v-card>
                 <v-card-title primary-title>
                     เพิ่มผู้ใช้<v-spacer></v-spacer>
-                    <v-btn color="error">ยกเลิก</v-btn>
+                    <v-btn  @click="dialog = false" color="error">ยกเลิก</v-btn>
                 </v-card-title>
                 <v-card-text>
                     <Core-Error :error="error"></Core-Error>
