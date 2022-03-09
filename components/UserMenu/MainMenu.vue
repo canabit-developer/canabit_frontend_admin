@@ -41,7 +41,7 @@
         <v-list expand shaped class="vertical-nav-menu-items pr-5">
             <UserMenu-NavbarLink path="/" title="Home" icon="mdi-home-outline"></UserMenu-NavbarLink>
               <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="mdi-home-outline"></UserMenu-NavbarLink>
-
+ <UserMenu-NavbarLink path="/broker" title="Broker" icon="mdi-home-outline"></UserMenu-NavbarLink>
 
             <UserMenu-NavbarLink path="/transaction" title="Transaction" icon="mdi-bank-transfer"></UserMenu-NavbarLink>
             <!-- <UserMenu-NavbarLink path="/partner" title="E-commerce" icon="mdi-handshake-outline"></UserMenu-NavbarLink> -->
