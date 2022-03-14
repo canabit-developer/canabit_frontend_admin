@@ -7,10 +7,7 @@
                 <v-app-bar-nav-icon class="d-block d-lg-none me-2" @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
 
                 <v-spacer></v-spacer>
-                <v-btn dark rounded color="blue" class="my-point">
-                    <v-icon style="color:white;">mdi-bitcoin</v-icon> Point : 8000
-                </v-btn>
-
+                
             </div>
         </div>
     </v-app-bar>
@@ -40,8 +37,9 @@
 
         <v-list expand shaped class="vertical-nav-menu-items pr-5">
             <UserMenu-NavbarLink path="/" title="Home" icon="mdi-home-outline"></UserMenu-NavbarLink>
-              <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="mdi-home-outline"></UserMenu-NavbarLink>
- <UserMenu-NavbarLink path="/broker" title="Broker" icon="mdi-home-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="mdi-home-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/kyc" title="kyc" icon="mdi-home-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/broker" title="Broker" icon="mdi-home-outline"></UserMenu-NavbarLink>
 
             <UserMenu-NavbarLink path="/transaction" title="Transaction" icon="mdi-bank-transfer"></UserMenu-NavbarLink>
             <!-- <UserMenu-NavbarLink path="/partner" title="E-commerce" icon="mdi-handshake-outline"></UserMenu-NavbarLink> -->
@@ -54,7 +52,7 @@
                 <UserMenu-NavbarLink path="/signals" title="Indicator" icon="mdi-broadcast"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/copytrade" title=" Copy Trade" icon="mdi-crown-outline"></UserMenu-NavbarLink>
             </UserMenu-NavMenuGroup>
-            
+
             <UserMenu-NavMenuSectionTitle title="USER SETTING"></UserMenu-NavMenuSectionTitle>
             <UserMenu-NavbarLink path="/accountstatus" title="History Account" icon="mdi-history"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/account" title="Account Setting" icon="mdi-account-cog-outline"></UserMenu-NavbarLink>
@@ -105,8 +103,9 @@ export default {
     left: 50%;
     transform: translateX(-50%);
 }
-.bg-navb{
-    background: rgb(0,221,126);
-background: linear-gradient(90deg, rgba(0,221,126,1) 0%, rgba(0,255,217,1) 100%);
+
+.bg-navb {
+    background: rgb(0, 221, 126);
+    background: linear-gradient(90deg, rgba(0, 221, 126, 1) 0%, rgba(0, 255, 217, 1) 100%);
 }
 </style>

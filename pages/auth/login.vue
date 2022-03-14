@@ -9,9 +9,15 @@
                         <img class="h-14" src="~/static/images/logos/canabit_vector.svg" alt="">
                     </center>
                     <div class="error">
+                
                         <div v-if="error.detail">
                             <v-alert dense outlined text type="error" :value="true">
                                 {{error.detail}}
+                            </v-alert>
+                        </div>
+                          <div v-if="errorRegister.non_field_errors">
+                            <v-alert dark dense    v-for="(message,i) in errorRegister.non_field_errors" :key="i" type="error" :value="true">
+                                {{message}}
                             </v-alert>
                         </div>
                         <div v-if="errorRegister.email">
@@ -36,13 +42,13 @@
                         <br>
                         <v-text-field prepend-inner-icon="mdi-form-textbox-password" v-model="form.password" required color="primary" outlined :type="isPasswordVisible ? 'text' : 'password'" label="Password" placeholder="············" :append-icon="isPasswordVisible ? `mdi-eye-off-outline` : `mdi-eye-outline`" hide-details @click:append="isPasswordVisible = !isPasswordVisible"></v-text-field>
 
-                        <div class="d-flex align-center justify-space-between flex-wrap">
+                        <!-- <div class="d-flex align-center justify-space-between flex-wrap">
                             <v-spacer></v-spacer>
 
                             <router-link class="mt-1" :to="{path:'/auth/forgot'}">
                                 Forgot Password?
                             </router-link>
-                        </div>
+                        </div> -->
 
                         <v-btn type="submit" x-large dark block class="bg-primary-g mt-6 font-semibold">
                             เข้าสู่ระบบ
@@ -96,7 +102,7 @@ export default {
                 password: ''
             },
             error: {},
-            errorRegister: {}
+            errorRegister:{}
         })
     },
     async created() {
@@ -115,7 +121,7 @@ export default {
                     return true
                 } else {
                     if (alert) {
-                        this.error = signin
+                        this.errorRegister = signin
                     }
                     return false
                 }

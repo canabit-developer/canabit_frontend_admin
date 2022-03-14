@@ -10,8 +10,13 @@ class AuthModule extends VuexModule {
   public async setUser(){
     let user = await Core.getHttp(`/api/auth/v2/profile/`)
     this.user = user;
-    this.user.fuck = "sdsdsd"
+    //this.user.fuck = "sdsdsd"
     return user;
+  }
+
+
+  public async getMyKyc(){
+    let kyc = await Core.getHttp(``)
   }
 
  

@@ -16,7 +16,8 @@
                 <v-card-text>
                     <Core-Error :error="error"></Core-Error>
                     <form @submit.prevent="createUser()">
-                        <v-text-field v-model="form.username" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="username" hide-details></v-text-field>
+                        {{$required}}
+                        <v-text-field :rules="[$required]" v-model="form.username" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="username" hide-details></v-text-field>
                         <v-text-field type="password" v-model="form.password" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="password" hide-details></v-text-field>
                         <v-text-field type="password" v-model="form.password_confirm" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="password_confirm" hide-details></v-text-field>
                         <v-text-field v-model="form.first_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="first_name" hide-details></v-text-field>
@@ -70,6 +71,7 @@ import _ from 'lodash'
 export default {
     data() {
         return ({
+            
             response: false,
             items: [],
             headers: [],
