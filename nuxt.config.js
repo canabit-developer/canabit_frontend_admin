@@ -42,12 +42,14 @@ export default {
     css: [
         '@assets/main.css',
         '@assets/components.css',
+        'vueditor/dist/style/vueditor.min.css'
         // '@assets/styles.scss'
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-        '@tools/validate'
+        '@tools/validate',
+        '@plugins/editor.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

@@ -1,0 +1,61 @@
+<template>
+  <div>
+    <v-text-field
+      @change="startup()"
+      v-model="search"
+      outlined
+      label="ค้นหา"
+    ></v-text-field>
+    <v-data-table
+      :headers="headers"
+      :items="items.results"
+      class="elevation-1"
+    ></v-data-table>
+    <v-pagination v-model="page" :length="items.count / maxPage"></v-pagination>
+  </div>
+</template>
+
+ 
+<script>
+import { Core } from "@/vuexes/core";
+export default {
+  data: () => {
+    return {
+      items: [],
+      headers: [
+        { text: "id", value: "id" },
+        { text: "code", value: "code" },
+        { text: "status", value: "status" },
+        { text: "remark", value: "remark" },
+        { text: "created_at", value: "created_at" },
+        { text: "updated_at", value: "updated_at" },
+        { text: "account_type_id", value: "account_type_id" },
+        { text: "broker_id", value: "broker_id" },
+        { text: "product_id", value: "product_id" },
+        { text: "user_id", value: "user_id" },
+      ],
+      page: 1,
+      maxPage: 3,
+      search: "",
+    };
+  },
+  async created() {
+    await this.startup();
+  },
+  methods: {
+    async startup() {
+      this.items = await Core.getHttp(
+        `/api/adminea/order?page=${this.page}&search=${this.search}`
+      );
+    },
+  },
+  watch: {
+    async page(newVal, oldVal) {
+      await this.startup();
+    },
+  },
+};
+</script>
+ 
+<style>
+</style>

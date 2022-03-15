@@ -7,7 +7,7 @@
                 <v-app-bar-nav-icon class="d-block d-lg-none me-2" @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
 
                 <v-spacer></v-spacer>
-                
+
             </div>
         </div>
     </v-app-bar>
@@ -40,7 +40,15 @@
             <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="mdi-home-outline"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/kyc" title="kyc" icon="mdi-home-outline"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/broker" title="Broker" icon="mdi-home-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/store" title="store" icon="mdi-home-outline"></UserMenu-NavbarLink>
 
+            <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="EA">
+                <UserMenu-NavbarLink path="/ea" title="Product" icon="mdi-animation"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink>
+            </UserMenu-NavMenuGroup>
+ 
+            <v-divider></v-divider>
             <UserMenu-NavbarLink path="/transaction" title="Transaction" icon="mdi-bank-transfer"></UserMenu-NavbarLink>
             <!-- <UserMenu-NavbarLink path="/partner" title="E-commerce" icon="mdi-handshake-outline"></UserMenu-NavbarLink> -->
             <UserMenu-NavbarLink path="/forex" title="Forex" icon="mdi-finance"></UserMenu-NavbarLink>
