@@ -1,8 +1,3 @@
-api
-
-table
- Create
-
 <template>
 <div>
     <Bg-User></Bg-User>
@@ -15,7 +10,15 @@ table
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
-                <v-btn @click="openDialogUpdate(item.id)">Update Data</v-btn>
+                <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
+                    <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn x-small fab class="m-2" @click="deleteData(item.id)" color="error">
+                    <v-icon>mdi-delete</v-icon>
+                </v-btn>
+            </template>
+            <template v-slot:item.link="{ item }">
+                <a target="_blank" :href="item.link">Link</a>
             </template>
             <template v-slot:item.image="{ item }">
                 <div class="p-4"><img :src="item.image" class="w-20 h-auto shadow-xl" /></div>
@@ -37,15 +40,14 @@ table
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
-
+                        <div v-if="form.id">
+                            <img :src="form.image" alt="">
+                        </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <br><br><span>image</span><input type="file"><br><br>
+                        <br><br><span>image</span><input ref="indicator_image" type="file"><br><br>
                         <br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
                         <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="link" hide-details></v-text-field>
-
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
@@ -78,12 +80,6 @@ export default {
                 text: "image",
                 value: "image"
             }, {
-                text: "detail",
-                value: "detail"
-            }, {
-                text: "link",
-                value: "link"
-            }, {
                 text: "is_active",
                 value: "is_active"
             }, {
@@ -92,6 +88,10 @@ export default {
             }, {
                 text: "updated_at",
                 value: "updated_at"
+
+            }, {
+                text: "link",
+                value: "link"
             }, {
                 text: "Action",
                 value: "actions"
@@ -110,15 +110,30 @@ export default {
     methods: {
         async startup() {
             this.items = await Core.getHttp(`/api/adminindicator/product/?page=${this.page}&search=${this.search}`);
+            await this.closeDialog()
         },
         async store() {
-
+            let data = await Core.postHttpAlert(`/api/adminindicator/product/`, this.form)
+            if (data.id) {
+                await this.updateImage(data.id)
+                await this.startup();
+            }
+        },
+        async updateImage(id) {
+            let image = this.$refs.indicator_image.files[0]
+            if (image) {
+                let formData = new FormData()
+                formData.append('image', image);
+                let update = await Core.putImageHttp(`/api/adminindicator/product/${id}/`, formData)
+            }
         },
         async update() {
+            delete this.form.image
             let data = await Core.putHttpAlert(`/api/adminindicator/product/${this.form.id}/`, this.form)
+            await this.updateImage(data.id);
             await this.startup();
         },
-        async delete(id) {
+        async deleteData(id) {
             let data = await Core.deleteHttpAlert(`/api/adminindicator/product/${id}/`)
             await this.startup();
         },

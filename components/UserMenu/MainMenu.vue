@@ -47,19 +47,28 @@
                 <UserMenu-NavbarLink path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink>
             </UserMenu-NavMenuGroup>
- 
-            <v-divider></v-divider>
-            <UserMenu-NavbarLink path="/transaction" title="Transaction" icon="mdi-bank-transfer"></UserMenu-NavbarLink>
-            <!-- <UserMenu-NavbarLink path="/partner" title="E-commerce" icon="mdi-handshake-outline"></UserMenu-NavbarLink> -->
+
+            <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="copytrade">
+                <UserMenu-NavbarLink path="/copytrade" title="Product" icon="mdi-animation"></UserMenu-NavbarLink>
+                <!-- <UserMenu-NavbarLink path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink> -->
+            </UserMenu-NavMenuGroup>
+
+            <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="indicator">
+                <UserMenu-NavbarLink path="/indicator" title="Product" icon="mdi-animation"></UserMenu-NavbarLink>
+                <!-- <UserMenu-NavbarLink path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink> -->
+            </UserMenu-NavMenuGroup>
+
+            <!-- <v-divider></v-divider> -->
+            <!-- <UserMenu-NavbarLink path="/transaction" title="Transaction" icon="mdi-bank-transfer"></UserMenu-NavbarLink> 
             <UserMenu-NavbarLink path="/forex" title="Forex" icon="mdi-finance"></UserMenu-NavbarLink>
-            <UserMenu-NavbarGroup title="Pages"></UserMenu-NavbarGroup>
-            <!-- <UserMenu-NavbarLink path="/semiauto" title="EA" icon="mdi-animation"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/signals" title="Signals" icon="mdi-broadcast"></UserMenu-NavbarLink> -->
+            <UserMenu-NavbarGroup title="Pages"></UserMenu-NavbarGroup> 
             <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="Product">
                 <UserMenu-NavbarLink path="/semiauto" title="EA" icon="mdi-animation"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/signals" title="Indicator" icon="mdi-broadcast"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/copytrade" title=" Copy Trade" icon="mdi-crown-outline"></UserMenu-NavbarLink>
-            </UserMenu-NavMenuGroup>
+            </UserMenu-NavMenuGroup> -->
 
             <UserMenu-NavMenuSectionTitle title="USER SETTING"></UserMenu-NavMenuSectionTitle>
             <UserMenu-NavbarLink path="/accountstatus" title="History Account" icon="mdi-history"></UserMenu-NavbarLink>
