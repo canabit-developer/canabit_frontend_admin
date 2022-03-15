@@ -83,6 +83,21 @@ class CoreModule extends VuexModule {
     }
   }
 
+  async putImageHttp(url: string, form: any): Promise<any> {
+ 
+      return await axios.put(url, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then((r) => {
+        Web.alert('Successfully edited')
+        return r.data
+      }).catch((e) => {
+        Web.alert('Failed to edit data', 'error')
+        return e.response.data
+      }) 
+  }
+
   public fillData(arr: any, key: string, val: any) {
     return _.find(arr, (r) => { return r[key] == val })
   }

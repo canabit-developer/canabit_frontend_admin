@@ -1,7 +1,7 @@
 <template>
 <div>
     <Bg-User></Bg-User>
-    <div class="relative">
+    <div class="relative " v-if="response">
         <v-toolbar flat color="transparent">
             <h2 class="text-3xl font-semibold">EA Products </h2>
             <v-spacer></v-spacer>
@@ -10,16 +10,24 @@
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
-                <v-btn @click="openDialogUpdate(item.id)">Update Data</v-btn>
+                <div class="flex">
+                    <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
+                        <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn x-small fab class="m-2" @click="deleteData(item.id)" color="error">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                </div>
             </template>
             <template v-slot:item.image="{ item }">
                 <div class="p-4"><img :src="item.image" class="w-20 h-auto shadow-xl" /></div>
             </template>
             <template v-slot:item.is_active="{ item }">
                 <UI-IsActive :active="item.is_active"></UI-IsActive>
+
             </template>
         </v-data-table>
-        <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
+        <v-pagination v-model="page" :length="maxPage"></v-pagination>
 
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
@@ -32,17 +40,17 @@
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
-
+                        <div v-if="form.id">
+                            <img :src="form.image" alt="">
+                        </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
                         <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="sub_title" hide-details></v-text-field>
-                        <br><br><span>image</span><input type="file"><br><br>
-                        <v-text-field v-model="form.price" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="price" hide-details></v-text-field>
+                        <br><br><span>image</span><input ref="ea_image" type="file"><br><br>
+                        <v-text-field type="number" v-model="form.price" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="price" hide-details></v-text-field>
+                        <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
                         <br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
-
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
-
+                        <!-- <pre>{{form}}</pre> -->
                         <div class="mt-4 flex">
                             <v-spacer />
                             <v-btn type="submit" color="success">Submit</v-btn>
@@ -79,7 +87,7 @@ export default {
             }, {
                 text: "price",
                 value: "price"
-            },  {
+            }, {
                 text: "is_active",
                 value: "is_active"
             }, {
@@ -97,6 +105,8 @@ export default {
             search: "",
             form: {},
             dialog: false,
+            brokers: [],
+            response: false
 
         };
     },
@@ -105,16 +115,34 @@ export default {
     },
     methods: {
         async startup() {
+            this.brokers = await Core.getHttp(`/api/finance/broker/?is_active=true`)
             this.items = await Core.getHttp(`/api/adminea/product/?page=${this.page}&search=${this.search}`);
+            this.maxPage = this.items.count / 3
+            this.response = true
+            await this.closeDialog();
         },
         async store() {
-
+            let data = await Core.postHttpAlert(`/api/adminea/product/`, this.form)
+            if (data.id) {
+                await this.updateImage(data.id)
+                await this.startup();
+            }
+        },
+        async updateImage(id) {
+            let image = this.$refs.ea_image.files[0]
+            if (image) {
+                let formData = new FormData()
+                formData.append('image', image);
+                let update = await Core.putImageHttp(`/api/adminea/product/${id}/`, formData)
+            }
         },
         async update() {
+            delete this.form.image
             let data = await Core.putHttpAlert(`/api/adminea/product/${this.form.id}/`, this.form)
+            await this.updateImage(data.id);
             await this.startup();
         },
-        async delete(id) {
+        async deleteData(id) {
             let data = await Core.deleteHttpAlert(`/api/adminea/product/${id}/`)
             await this.startup();
         },
