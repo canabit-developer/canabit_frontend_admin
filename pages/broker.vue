@@ -3,7 +3,7 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> </h2>
+            <h2 class="text-3xl font-semibold">Brokers </h2>
             <v-spacer></v-spacer>
             <v-btn @click="openDialog()">Add Data</v-btn>
         </v-toolbar>

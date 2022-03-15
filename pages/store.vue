@@ -1,12 +1,70 @@
+api
+
+table
+ Create
+
 <template>
-    <div> 
-        <v-text-field @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
-        <v-data-table :headers="headers" :items="items.results" class="elevation-1"></v-data-table>
+<div>
+    <Bg-User></Bg-User>
+    <div class="relative">
+        <v-toolbar flat color="transparent">
+            <h2 class="text-3xl font-semibold"> Store</h2>
+            <v-spacer></v-spacer>
+            <v-btn @click="openDialog()">Add Data</v-btn>
+        </v-toolbar>
+        <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
+        <v-data-table :headers="headers" :items="items.results" class="elevation-1">
+            <template v-slot:item.actions="{ item }">
+                <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
+                    <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn x-small fab class="m-2" @click="deleteData(item.id)" color="error">
+                    <v-icon>mdi-delete</v-icon>
+                </v-btn>
+            </template>
+            <template v-slot:item.image="{ item }">
+                <div class="p-4"><img :src="item.image" class="w-20 h-auto shadow-xl" /></div>
+            </template>
+            <template v-slot:item.is_active="{ item }">
+                <UI-IsActive :active="item.is_active"></UI-IsActive>
+            </template>
+        </v-data-table>
         <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
+
+        <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
+            <v-card>
+                <v-card-title primary-title>
+                    {{(form.id)?"Update":"Create"}} Data
+                    <v-spacer></v-spacer>
+                    <v-btn @click="closeDialog()" text color="error">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                </v-card-title>
+                <v-card-text>
+                    <form @submit.prevent="(form.id)?update():store()">
+                        <div v-if="form.id">
+                            <img :src="form.image" alt="">
+                        </div>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
+                        <br><br><span>image</span><input ref="store_product_image" type="file"><br><br>
+                        <br>
+                        <!-- <Core-Editor v-model="form.detail"></Core-Editor> -->
+                        <v-textarea class="mt-4" prepend-inner-icon="mdi-account-outline" outlined v-model="form.detail" rows="3" label="Detail"  textarea   ></v-textarea>
+                        <v-text-field v-model="form.point_use" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="point_use" hide-details></v-text-field>
+
+                        <div class="mt-4 flex">
+                            <v-spacer />
+                            <v-btn type="submit" color="success">Submit</v-btn>
+                        </div>
+                    </form>
+                </v-card-text>
+
+            </v-card>
+        </v-dialog>
     </div>
+</div>
 </template>
 
- 
 <script>
 import {
     Core
@@ -15,10 +73,36 @@ export default {
     data: () => {
         return {
             items: [],
-            headers:[{ text: "id" , value:"id"},{ text: "name" , value:"name"},{ text: "image" , value:"image"},{ text: "detail" , value:"detail"},{ text: "point_use" , value:"point_use"},{ text: "is_active" , value:"is_active"},{ text: "created_at" , value:"created_at"},{ text: "updated_at" , value:"updated_at"},],
-            page:1,
-            maxPage:3,
+            headers: [{
+                text: "id",
+                value: "id"
+            }, {
+                text: "name",
+                value: "name"
+            }, {
+                text: "image",
+                value: "image"
+            }, , {
+                text: "point_use",
+                value: "point_use"
+            }, {
+                text: "created_at",
+                value: "created_at"
+            }, {
+                text: "updated_at",
+                value: "updated_at"
+            }, {
+                text: "is_active",
+                value: "is_active"
+            }, {
+                text: "Action",
+                value: "actions"
+            }],
+            page: 1,
+            maxPage: 3,
             search: "",
+            form: {},
+            dialog: false,
 
         };
     },
@@ -28,7 +112,43 @@ export default {
     methods: {
         async startup() {
             this.items = await Core.getHttp(`/api/adminstore/product/?page=${this.page}&search=${this.search}`);
+            await this.closeDialog()
         },
+        async store() {
+            let data = await Core.postHttpAlert(`/api/adminstore/product/`, this.form)
+            if (data.id) {
+                await this.updateImage(data.id)
+                await this.startup();
+            }
+        },
+        async updateImage(id) {
+            let image = this.$refs.store_product_image.files[0]
+            if (image) {
+                let formData = new FormData()
+                formData.append("image", image);
+                let update = await Core.putImageHttp(`/api/adminstore/product/${id}/`, formData)
+            }
+        },
+        async update() {
+            delete this.form.image
+            let data = await Core.putHttpAlert(`/api/adminstore/product/${this.form.id}/`, this.form)
+            await this.startup();
+        },
+        async deleteData(id) {
+            let data = await Core.deleteHttpAlert(`/api/adminstore/product/${id}/`)
+            await this.startup();
+        },
+        async openDialog() {
+            this.dialog = true;
+        },
+        async openDialogUpdate(id) {
+            this.form = await Core.getHttp(`/api/adminstore/product/${id}/`)
+            this.dialog = true;
+        },
+        async closeDialog() {
+            this.form = {};
+            this.dialog = false;
+        }
     },
     watch: {
         async page(newVal, oldVal) {
@@ -37,6 +157,6 @@ export default {
     },
 };
 </script>
- 
+
 <style>
 </style>
