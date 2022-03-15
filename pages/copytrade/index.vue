@@ -49,7 +49,8 @@
                         <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
 
                         <Core-Editor v-model="form.detail"></Core-Editor>
-
+                        <!-- <v-jsoneditor :plus="true" v-model="raw" :options="{ mode: 'code' }" height="400px"  />
+                        <pre>{{raw}}</pre> -->
                         <div class="mt-4 flex">
                             <v-spacer />
                             <v-btn type="submit" color="success">Submit</v-btn>
@@ -67,7 +68,12 @@
 import {
     Core
 } from "@/vuexes/core";
+import VJsoneditor from 'v-jsoneditor/src/index'
+
 export default {
+    components: {
+        VJsoneditor
+    },
     data: () => {
         return {
             items: [],
@@ -99,10 +105,16 @@ export default {
             page: 1,
             maxPage: 3,
             search: "",
-            form: {},
+            form: {
+                
+            },
             dialog: false,
             brokers: [],
-            response: false
+            response: false,
+            raw:{
+                    test:"sasa",
+                    ss:"asas"
+                }
         };
     },
     async created() {
