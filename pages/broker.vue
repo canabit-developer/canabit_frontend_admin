@@ -3,9 +3,9 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">Brokers </h2>
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-bank</v-icon> Brokers </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()"> เพิ่ม Broker</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
@@ -28,8 +28,9 @@
 
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
-                <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                <v-card-title primary-title >
+                    <v-icon class="m-4">em em-bank</v-icon>
+                    {{(form.id)?"Update":"เพิ่ม"}} Broker
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -38,14 +39,14 @@
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
 
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-select multiple v-model="form.types" :items="accountTypes" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-chart" outlined label="ชื่อ Broker" hide-details></v-text-field>
+                        <v-select multiple v-model="form.types" :items="accountTypes" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-moneybag" outlined label="ประเภทบัญชี" hide-details></v-select>
 
-                        <br><br><span>image</span><input ref="finance_broker_image" type="file"><br><br>
+                        <br><br><span>รูป Broker </span><input ref="finance_broker_image" type="file"><br><br>
 
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success"> เพิ่ม Broker</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -65,25 +66,25 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "name",
+                text: "ชื่อ Broker",
                 value: "name"
             }, {
-                text: "image",
+                text: "รูป Broker",
                 value: "image"
             }, {
-                text: "is_active",
+                text: "สถานะ",
                 value: "is_active"
             }, {
-                text: "created_at",
+                text: "วันที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดท",
                 value: "updated_at"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,
