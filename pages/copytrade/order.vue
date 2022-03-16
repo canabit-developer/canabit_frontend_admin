@@ -1,11 +1,16 @@
+api
+
+table
+ Create
+
 <template>
 <div>
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">Brokers </h2>
+            <h2 class="text-3xl font-semibold">Order </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <!-- <v-btn @click="openDialog()">Add Data</v-btn> -->
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
@@ -17,12 +22,10 @@
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
-            <template v-slot:item.image="{ item }">
-                <div class="p-4"><img :src="$url+item.image" class="w-20 h-auto shadow-xl" /></div>
+             <template v-slot:item.product_image="{ item }">
+                <div class="p-4"><img :src="$url+item.product_image" class="w-20 h-auto shadow-xl" /></div>
             </template>
-            <template v-slot:item.is_active="{ item }">
-                <UI-IsActive :active="item.is_active"></UI-IsActive>
-            </template>
+
         </v-data-table>
         <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
 
@@ -36,12 +39,12 @@
                     </v-btn>
                 </v-card-title>
                 <v-card-text>
-                    <form @submit.prevent="(form.id)?update():store()">
-
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-select multiple v-model="form.types" :items="accountTypes" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
-
-                        <br><br><span>image</span><input ref="finance_broker_image" type="file"><br><br>
+                    <form @submit.prevent="(form.id)?update():store()"> 
+                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="code" hide-details></v-text-field>
+                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
+                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
+                        <v-text-field v-model="form.product_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="product_id" hide-details></v-text-field>
+                        <v-text-field v-model="form.user_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_id" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
@@ -65,32 +68,40 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
-                value: "id"
-            }, {
-                text: "name",
-                value: "name"
-            }, {
-                text: "image",
-                value: "image"
-            }, {
-                text: "is_active",
-                value: "is_active"
-            }, {
-                text: "created_at",
-                value: "created_at"
-            }, {
-                text: "updated_at",
-                value: "updated_at"
-            }, {
-                text: "Action",
-                value: "actions"
-            }],
+                    text: "id",
+                    value: "id"
+                }, {
+                    text: "code",
+                    value: "code"
+                },
+
+                {
+                    text: "user",
+                    value: "user_full"
+                },
+                {
+                    text: "product",
+                    value: "product_name"
+                },
+                {
+                    text: "product image",
+                    value: "product_image"
+                },
+                {
+                    text: "created_at",
+                    value: "created_at"
+                }, {
+                    text: "updated_at",
+                    value: "updated_at"
+                }, {
+                    text: "Action",
+                    value: "actions"
+                }
+            ],
             page: 1,
             maxPage: 3,
             search: "",
             form: {},
-            accountTypes: [],
             dialog: false,
 
         };
@@ -100,41 +111,38 @@ export default {
     },
     methods: {
         async startup() {
-
-            this.items = await Core.getHttp(`/api/adminfinanace/broker/?page=${this.page}&search=${this.search}`);
-            this.accountTypes = await Core.getHttp(`/api/finance/accounttype/`)
+            this.items = await Core.getHttp(`/api/admincopytrade/order/?page=${this.page}&search=${this.search}`);
             await this.closeDialog()
         },
         async store() {
-            let data = await Core.postHttpAlert(`/api/adminfinanace/broker/`, this.form)
+            let data = await Core.postHttpAlert(`/api/admincopytrade/order/`, this.form)
             if (data.id) {
                 await this.updateImage(data.id)
                 await this.startup();
             }
         },
         async updateImage(id) {
-            let image = this.$refs.finance_broker_image.files[0]
+            let image = this.$refs.copytrade_order_image.files[0]
             if (image) {
                 let formData = new FormData()
                 formData.append("image", image);
-                let update = await Core.putImageHttp(`/api/adminfinanace/broker/${id}/`, formData)
+                let update = await Core.putImageHttp(`/api/admincopytrade/order/${id}/`, formData)
             }
         },
         async update() {
             delete this.form.image
-            let data = await Core.putHttpAlert(`/api/adminfinanace/broker/${this.form.id}/`, this.form)
-            await this.updateImage(data.id)
+            let data = await Core.putHttpAlert(`/api/admincopytrade/order/${this.form.id}/`, this.form)
             await this.startup();
         },
         async deleteData(id) {
-            let data = await Core.deleteHttpAlert(`/api/adminfinanace/broker/${id}/`)
+            let data = await Core.deleteHttpAlert(`/api/admincopytrade/order/${id}/`)
             await this.startup();
         },
         async openDialog() {
             this.dialog = true;
         },
         async openDialogUpdate(id) {
-            this.form = await Core.getHttp(`/api/adminfinanace/broker/${id}/`)
+            this.form = await Core.getHttp(`/api/admincopytrade/order/${id}/`)
             this.dialog = true;
         },
         async closeDialog() {

@@ -49,7 +49,8 @@ export default {
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         '@tools/validate',
-        '@plugins/editor.js'
+        '@plugins/editor.js',
+        '@plugins/varible.ts'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

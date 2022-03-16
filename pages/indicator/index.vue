@@ -21,7 +21,7 @@
                 <a target="_blank" :href="item.link">Link</a>
             </template>
             <template v-slot:item.image="{ item }">
-                <div class="p-4"><img :src="item.image" class="w-20 h-auto shadow-xl" /></div>
+                <div class="p-4"><img :src="$url+item.image" class="w-20 h-auto shadow-xl" /></div>
             </template>
             <template v-slot:item.is_active="{ item }">
                 <UI-IsActive :active="item.is_active"></UI-IsActive>

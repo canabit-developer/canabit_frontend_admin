@@ -64,7 +64,7 @@
                         <v-text-field v-model="form.user_verified_image_card_error" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_verified_image_card_error" hide-details></v-text-field>
                         <v-text-field v-model="form.user_verified_image_selfie_error" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_verified_image_selfie_error" hide-details></v-text-field>
                        -->
-                                <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="phone_number" hide-details></v-text-field>
+                                <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="เบอร์โทร" hide-details></v-text-field>
                                 <!-- <v-text-field v-model="form.phone_verified" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="phone_verified" hide-details></v-text-field> -->
                                 <!-- <v-text-field v-model="form.refferal_code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="refferal_code" hide-details></v-text-field> -->
                                 <!--                         
@@ -83,7 +83,7 @@
                                 <v-checkbox label="ชื่อ-สกุล ไม่ตรงกับบัตรประจำตัวประชาชน" v-model="form.user_verified_name_error"></v-checkbox>
                                 <div class="mt-4 flex">
                                     <v-spacer />
-                                    <v-btn type="submit" color="success">Submit</v-btn>
+                                    <v-btn type="submit" color="success">บันทึก</v-btn>
                                 </div>
                             </form>
                         </div>
@@ -115,11 +115,11 @@ export default {
         return {
             items: [],
             headers: [{
-                    text: "id",
+                    text: "Order",
                     value: "id"
                 },
                 {
-                    text: "user_full",
+                    text: "ผู้ใช้",
                     value: "user_full"
                 },
                 {
