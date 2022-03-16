@@ -38,6 +38,7 @@
                     </v-btn>
                 </v-card-title>
                 <v-card-text>
+                    
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
