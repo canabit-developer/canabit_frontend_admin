@@ -3,11 +3,11 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">KYC </h2>
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-2">em em-clipboard</v-icon> KYC </h2>
             <v-spacer></v-spacer>
             <!-- <v-btn @click="openDialog()">Add Data</v-btn> -->
         </v-toolbar>
-        <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
+        <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
@@ -46,7 +46,8 @@
         <v-dialog v-model="dialog" fullscreen scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon class="mr-2">em em-clipboard</v-icon>
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}} KYC ของผู้ใช้
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -56,7 +57,7 @@
                     <div class="flex flex-col md:flex-row">
                         <div class="w-full md:w-1/2 p-4">
                             <form @submit.prevent="(form.id)?update():store()">
-                                <h2>{{form.user_full}}</h2>
+                                <h2> <v-icon class="mr-2" >em em-bust_in_silhouette</v-icon> {{form.user_full}}</h2>
                                 <!-- <v-text-field v-model="form.image_card" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="image_card" hide-details></v-text-field>
                                 <v-text-field v-model="form.image_selfie" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="image_selfie" hide-details></v-text-field>
                                 -->
@@ -64,7 +65,7 @@
                         <v-text-field v-model="form.user_verified_image_card_error" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_verified_image_card_error" hide-details></v-text-field>
                         <v-text-field v-model="form.user_verified_image_selfie_error" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_verified_image_selfie_error" hide-details></v-text-field>
                        -->
-                                <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="เบอร์โทร" hide-details></v-text-field>
+                                <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="em em-iphone" outlined label="หมายเลขโทรศัพท์" hide-details></v-text-field>
                                 <!-- <v-text-field v-model="form.phone_verified" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="phone_verified" hide-details></v-text-field> -->
                                 <!-- <v-text-field v-model="form.refferal_code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="refferal_code" hide-details></v-text-field> -->
                                 <!--                         
@@ -72,7 +73,7 @@
                                 <!-- <v-text-field v-model="form.user_verified_id_error" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_verified_id_error" hide-details></v-text-field>
                         <v-text-field v-model="form.user_verified_name_error" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_verified_name_error" hide-details></v-text-field>
                         -->
-                                <v-text-field v-model="form.card_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="card_id" hide-details></v-text-field>
+                                <v-text-field v-model="form.card_id" class="mt-4" prepend-inner-icon="em em-1234" outlined label="เลขประจำตัวประชาชน" hide-details></v-text-field>
 
                                 <v-checkbox label="ผ่านการอนุมัติยืนยันตัวตน" v-model="form.user_verified"></v-checkbox>
                                 <v-checkbox label="ยืนยันตัวตนผ่านมือถือ (OTP) แล้ว" v-model="form.phone_verified"></v-checkbox>
@@ -83,16 +84,16 @@
                                 <v-checkbox label="ชื่อ-สกุล ไม่ตรงกับบัตรประจำตัวประชาชน" v-model="form.user_verified_name_error"></v-checkbox>
                                 <div class="mt-4 flex">
                                     <v-spacer />
-                                    <v-btn type="submit" color="success">บันทึก</v-btn>
+                                    <v-btn type="submit" color="success"><v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                                 </div>
                             </form>
                         </div>
-                        <div class="w-full md:w-1/2 p-4">
-                            <h2>ภาพถ่ายสำเนาบัตรประจำตัวประชาชน</h2>
+                        <div class="w-full md:w-1/ p-4">
+                            <h2> <v-icon class="mr-2"> em em-camera</v-icon> ภาพถ่ายสำเนาบัตรประจำตัวประชาชน</h2>
                             <img v-if="form.image_card" :src="form.image_card" alt="">
                             <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
                             <br><br>
-                            <h2>ภาพถ่าย Selfie กับ ประจำตัวประชาชน</h2>
+                            <h2> <v-icon class="mr-2"> em em-camera_with_flash</v-icon> ภาพถ่าย Selfie กับ ประจำตัวประชาชน</h2>
                             <img  v-if="form.image_selfie"  :src="form.image_selfie" alt="">
                              <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
                         </div>
@@ -115,7 +116,7 @@ export default {
         return {
             items: [],
             headers: [{
-                    text: "Order",
+                    text: "ลำดับ",
                     value: "id"
                 },
                 {
@@ -123,7 +124,7 @@ export default {
                     value: "user_full"
                 },
                 {
-                    text: "card_id",
+                    text: "เลขประจำตัวประชาชน",
                     value: "card_id"
                 },
                 // {
@@ -134,16 +135,16 @@ export default {
                 //     value: "image_selfie"
                 // },
                 {
-                    text: "phone_number",
+                    text: "หมายเลขโทรศัพท์",
                     value: "phone_number"
                 },
 
                 {
-                    text: "user_verified",
+                    text: "สถานะ",
                     value: "user_verified"
                 },
                 {
-                    text: "Remark",
+                    text: "หมายเหตุ",
                     value: "activated"
                 },
                 //   {   text: "user_verified_image_card_error",
@@ -171,12 +172,12 @@ export default {
                 //     value: "user_verified_name_error"
                 // },  
                 {
-                    text: "Action",
+                    text: "การจัดการ",
                     value: "actions"
                 }
             ],
             page: 1,
-            maxPage: 3,
+            maxPage: 10,
             search: "",
             form: {},
             dialog: false,

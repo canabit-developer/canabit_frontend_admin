@@ -36,26 +36,26 @@
         </div>
 
         <v-list expand shaped class="vertical-nav-menu-items pr-5">
-            <UserMenu-NavbarLink path="/" title="Home" icon="mdi-home-outline"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="mdi-home-outline"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/kyc" title="kyc" icon="mdi-home-outline"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/broker" title="Broker" icon="mdi-home-outline"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/store" title="store" icon="mdi-home-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/" title="หน้าแรก" icon="em em-house"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="em em-female-office-worker"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/kyc" title="kyc" icon="em em-clipboard"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/store" title="store" icon="em em-trophy"></UserMenu-NavbarLink>
             <v-divider></v-divider>
-            <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="EA">
-                <UserMenu-NavbarLink class="ml-4" path="/ea" title="Product" icon="mdi-animation"></UserMenu-NavbarLink>
-                <UserMenu-NavbarLink class="ml-4" path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
-                <UserMenu-NavbarLink class="ml-4" path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavMenuGroup icon="em em-chart" title="EA">
+                <UserMenu-NavbarLink class="ml-4" path="/ea" title="Product" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink class="ml-4" path="/ea/user/" title="user" icon="em em-busts_in_silhouette"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink class="ml-4" path="/ea/detail/" title=" Request Test" icon="em em-chart_with_upwards_trend"></UserMenu-NavbarLink>
             </UserMenu-NavMenuGroup>
             <v-divider></v-divider>
-            <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="copytrade">
-                <UserMenu-NavbarLink class="ml-4" path="/copytrade" title="Product" icon="mdi-animation"></UserMenu-NavbarLink>
-                <UserMenu-NavbarLink class="ml-4" path="/copytrade/order/" title="Order" icon="mdi-broadcast"></UserMenu-NavbarLink>
+            <UserMenu-NavMenuGroup icon="em em-bookmark_tabs" title="copytrade">
+                <UserMenu-NavbarLink class="ml-4" path="/copytrade" title="Product" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink class="ml-4" path="/copytrade/order/" title="Order" icon="em em-clipboard"></UserMenu-NavbarLink>
                 <!-- <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink> -->
             </UserMenu-NavMenuGroup>
             <v-divider></v-divider>
-            <UserMenu-NavMenuGroup icon="mdi-bookmark-multiple-outline" title="indicator">
-                <UserMenu-NavbarLink class="ml-4" path="/indicator" title="Product" icon="mdi-animation"></UserMenu-NavbarLink>
+            <UserMenu-NavMenuGroup icon="em em-arrow_double_down" title="indicator">
+                <UserMenu-NavbarLink class="ml-4" path="/indicator" title="Product" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
                 <!-- <UserMenu-NavbarLink path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink> -->
             </UserMenu-NavMenuGroup> 
@@ -69,14 +69,14 @@
                 <UserMenu-NavbarLink path="/copytrade" title=" Copy Trade" icon="mdi-crown-outline"></UserMenu-NavbarLink>
             </UserMenu-NavMenuGroup> --> 
             <UserMenu-NavMenuSectionTitle title="USER SETTING"></UserMenu-NavMenuSectionTitle>
-            <UserMenu-NavbarLink path="/accountstatus" title="History Account" icon="mdi-history"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/account" title="Account Setting" icon="mdi-account-cog-outline"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/accountstatus" title="History Account" icon="em em-timer_clock"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/account" title="Account Setting" icon="em em-wrench"></UserMenu-NavbarLink>
         </v-list>
 
         <template v-slot:append>
             <div>
                 <div @click="logout()">
-                    <UserMenu-NavbarLink path="/logout" title="Logout" icon="mdi-logout"></UserMenu-NavbarLink>
+                    <UserMenu-NavbarLink path="/logout" title="Logout" icon="em em-door"></UserMenu-NavbarLink>
                 </div>
 
             </div>

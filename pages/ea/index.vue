@@ -3,11 +3,11 @@
     <Bg-User></Bg-User>
     <div class="relative " v-if="response">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">EA Products </h2>
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-chart</v-icon> EA Products </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()"> <v-icon class="mr-2 " > em em-file_folder</v-icon> เพิ่มสินค้า EA</v-btn>
         </v-toolbar>
-        <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
+        <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                 <div class="flex">
@@ -32,7 +32,8 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon class="mr-4">em em-chart</v-icon>
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}} สินค้า EA
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -43,17 +44,17 @@
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
                         </div>
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="sub_title" hide-details></v-text-field>
-                        <br><br><span>image</span><input ref="ea_image" type="file"><br><br>
-                        <v-text-field type="number" v-model="form.price" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="price" hide-details></v-text-field>
-                        <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-basket" outlined label="ชื่อสินค้า EA" hide-details></v-text-field>
+                        <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="em em-page_facing_up" outlined label="รายละเอียด" hide-details></v-text-field>
+                        <br><br><v-icon class="mr-2" >em em-camera </v-icon><span>รูปสินค้า EA : </span><input ref="ea_image" type="file"><br><br>
+                        <v-text-field type="number" v-model="form.price" class="mt-4" prepend-inner-icon="em em-dollar" outlined label="ราคา" hide-details></v-text-field>
+                        <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-bank" outlined label="Broker" hide-details></v-select>
                         <br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
                         <!-- <pre>{{form}}</pre> -->
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -73,35 +74,35 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "name",
+                text: "ชื่อสินค้า EA",
                 value: "name"
             }, {
-                text: "sub_title",
+                text: "รายละเอียด",
                 value: "sub_title"
             }, {
-                text: "image",
+                text: "รูปสินค้า EA",
                 value: "image"
             }, {
-                text: "price",
+                text: "ราคา",
                 value: "price"
             }, {
-                text: "is_active",
+                text: "สถานะ",
                 value: "is_active"
             }, {
-                text: "created_at",
+                text: "วันที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดทล่าสุด",
                 value: "updated_at"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,
-            maxPage: 3,
+            maxPage: 10,
             search: "",
             form: {},
             dialog: false,

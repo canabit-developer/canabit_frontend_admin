@@ -3,12 +3,12 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">Request Test </h2>
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-2" >em em-chart_with_upwards_trend</v-icon> Request Test </h2>
 
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()"> <v-icon class="mr-2 " > em em-file_folder</v-icon> เพิ่ม Request Test</v-btn>
         </v-toolbar>
-        <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
+        <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                 <v-btn @click="openDialogUpdate(item.id)">Update Data</v-btn>
@@ -20,7 +20,7 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}} Request Test
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -38,7 +38,7 @@
 
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -58,19 +58,19 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "code",
+                text: "ชื่อ Request Test ",
                 value: "code"
             }, {
-                text: "link",
+                text: "ที่อยู่ url",
                 value: "link"
             }, {
-                text: "created_at",
+                text: "วันที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดทล่าสุด",
                 value: "updated_at"
             }, {
                 text: "product_id",
@@ -79,11 +79,11 @@ export default {
                 text: "user_id",
                 value: "user_id"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,
-            maxPage: 3,
+            maxPage: 10,
             search: "",
             form: {},
             dialog: false,
