@@ -45,6 +45,7 @@ table
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
+                                 <v-checkbox v-if="form.id" v-model="form.is_active" label="Active"></v-checkbox>
                         </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-sports_medal" outlined label="ชื่อ reward" hide-details></v-text-field>
                         <br><br> <v-icon class="mr-2" >em em-camera </v-icon> <span>รูป Reward : </span><input ref="store_product_image" type="file"><br><br>

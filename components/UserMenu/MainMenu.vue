@@ -36,7 +36,7 @@
         </div>
 
         <v-list expand shaped class="vertical-nav-menu-items pr-5">
-            <UserMenu-NavbarLink path="/" title="หน้าแรก" icon="em em-house"></UserMenu-NavbarLink>
+            <!-- <UserMenu-NavbarLink path="/" title="หน้าแรก" icon="em em-house"></UserMenu-NavbarLink> -->
             <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="em em-female-office-worker"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/kyc" title="kyc" icon="em em-clipboard"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>

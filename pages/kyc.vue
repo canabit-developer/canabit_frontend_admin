@@ -90,11 +90,11 @@
                         </div>
                         <div class="w-full md:w-1/ p-4">
                             <h2> <v-icon class="mr-2"> em em-camera</v-icon> ภาพถ่ายสำเนาบัตรประจำตัวประชาชน</h2>
-                            <img v-if="form.image_card" :src="form.image_card" alt="">
+                            <img v-if="form.image_card" :src="$url+form.image_card" alt="">
                             <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
                             <br><br>
                             <h2> <v-icon class="mr-2"> em em-camera_with_flash</v-icon> ภาพถ่าย Selfie กับ ประจำตัวประชาชน</h2>
-                            <img  v-if="form.image_selfie"  :src="form.image_selfie" alt="">
+                            <img  v-if="form.image_selfie"  :src="$url+form.image_selfie" alt="">
                              <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
                         </div>
                     </div>

@@ -43,6 +43,7 @@
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
+                                <v-checkbox v-model="form.is_active" label="Active"></v-checkbox>
                         </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-basket" outlined label="ชื่อสินค้า EA" hide-details></v-text-field>
                         <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="em em-page_facing_up" outlined label="รายละเอียด" hide-details></v-text-field>

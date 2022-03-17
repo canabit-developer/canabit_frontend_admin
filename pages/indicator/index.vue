@@ -43,13 +43,14 @@
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
+                            <v-checkbox v-model="form.is_active" label="Active"></v-checkbox>
                         </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-arrows_clockwise" outlined label="ชื่อ Indicator " hide-details></v-text-field>
                         <br><br><v-icon class="mr-2" >em em-camera </v-icon><span>รูป Indicator : </span><input ref="indicator_image" type="file"><br><br>
                         <br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
                         <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="em em-link" outlined label="ที่อยู่ url" hide-details></v-text-field>
-
+                        
                         <div class="mt-4 flex">
                             <v-spacer />
                             <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>

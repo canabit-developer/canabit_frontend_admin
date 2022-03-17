@@ -17,7 +17,11 @@
                     </v-btn>
                 </div>
             </template>
-
+            <template v-slot:item.product_image="{ item }">
+                <div class="flex">
+                     <img class="w-20 h-auto shadow-xl" :src="$url+item.product_image" alt="">
+                </div>
+            </template>
         </v-data-table>
         <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
 
@@ -65,6 +69,15 @@ export default {
                 text: "รหัสสินค้า",
                 value: "code"
             }, {
+                text: "ชื่อสินค้า",
+                value: "product_name"
+            }, {
+                text: "รูปสินค้า",
+                value: "product_image"
+            }, {
+                text: "ชื่อผู้ใช้",
+                value: "user_full"
+            }, {
                 text: "ที่อยู่ url",
                 value: "link"
             }, {
@@ -73,12 +86,6 @@ export default {
             }, {
                 text: "วันที่อัพเดทล่าสุด",
                 value: "updated_at"
-            }, {
-                text: "ชื่อสินค้า",
-                value: "product_id"
-            }, {
-                text: "ชื่อผู้ใช้",
-                value: "user_id"
             }, {
                 text: "การจัดการ",
                 value: "actions"

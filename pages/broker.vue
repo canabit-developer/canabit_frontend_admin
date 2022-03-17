@@ -38,6 +38,7 @@
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
+                            <v-checkbox v-if="form.id" v-model="form.is_active" label="Active"></v-checkbox>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-chart" outlined label="ชื่อ Broker" hide-details></v-text-field>
                         <v-select multiple v-model="form.types" :items="accountTypes" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-moneybag" outlined label="ประเภทบัญชี" hide-details></v-select>
 
