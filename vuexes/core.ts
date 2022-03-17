@@ -137,6 +137,14 @@ class CoreModule extends VuexModule {
     return new File([u8arr],filename , { type: mime });
   }
 
+  async sentEmail(title:string,email:string,context:string){
+      return await Core.postHttp(`/api/adminaccounttool/emailsent/`,{
+        "title":title,
+        "email":email,
+        "context": context
+    })
+  }
+
 }
 
 import store from "@/vuexes"

@@ -198,7 +198,16 @@ export default {
         async update() {
             delete this.form.image_card
             delete this.form.image_selfie
+            let user = await Core.getHttp(`/api/adminaccount/userprofile/${this.form.user}/`)
             let data = await Core.putHttpAlert(`/api/adminaccount/kyc/${this.form.id}/`, this.form)
+            await Core.sentEmail('ผลการตรวจสอบข้อมูลส่วนตัว',user.email,`
+                ผลการตรวจสอล ${(this.form.user_verified)?'ผ่าน':'ไม่ผ่าน'}   
+                ข้อมูล
+                1.ภาพถ่ายสำเนาบัตรประจำตัวประชาชน ${(this.form.user_verified_image_card_error)?'ไม่ผ่าน':'ผ่าน'} 
+                2.ภาพถ่าย selfie  และ  บัตรประจำตัวประชาชน  ${(this.form.user_verified_image_selfie_error)?'ไม่ผ่าน':'ผ่าน'}  
+                3.เลขบัตรประชาชน และ บัตรประจำตัวประชาชน  ${(this.form.user_verified_id_error)?'ไม่ตรงกัน':'ตรงกัน'} 
+                4.ชื่อ-สกุล  และ บัตรประจำตัวประชาชน  ${(this.form.user_verified_name_error)?'ไม่ตรงกัน':'ตรงกัน'} 
+            `)
             await this.startup();
         },
         async delete(id) {
