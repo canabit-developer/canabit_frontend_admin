@@ -48,7 +48,7 @@
                         <br><br><v-icon class="mr-2" >em em-camera </v-icon><span>รูป Indicator : </span><input ref="indicator_image" type="file"><br><br>
                         <br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
-                        <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="em em-paperclip" outlined label="ที่อยู่ url" hide-details></v-text-field>
+                        <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="em em-link" outlined label="ที่อยู่ url" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />

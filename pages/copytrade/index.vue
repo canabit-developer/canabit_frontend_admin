@@ -53,7 +53,7 @@
                         <br><br>
                         <v-icon class="mr-2">em em-camera </v-icon> <span>รูป Master : </span><input ref="cp_image" type="file"><br><br>
                         <br>
-                        <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
+                        <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-bank" outlined label="Broker" hide-details></v-select>
                         <br><br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
                             <br>  <br>
@@ -89,10 +89,10 @@ export default {
         return {
             items: [],
             headers: [{
-                    text: "id",
+                    text: "ลำดับ",
                     value: "id"
                 }, {
-                    text: "name",
+                    text: "ชื่อ Master",
                     value: "name"
                 },
                 // {
@@ -100,19 +100,19 @@ export default {
                 //     value: "sub_title"
                 // },
                 {
-                    text: "image",
+                    text: "รูป Master",
                     value: "image"
                 }, {
-                    text: "is_active",
+                    text: "สถานะ",
                     value: "is_active"
                 }, {
-                    text: "created_at",
+                    text: "วันที่สร้าง",
                     value: "created_at"
                 }, {
-                    text: "updated_at",
+                    text: "วันที่อัพเดทล่าสุด",
                     value: "updated_at"
                 }, {
-                    text: "Action",
+                    text: "การจัดการ",
                     value: "actions"
                 }
             ],

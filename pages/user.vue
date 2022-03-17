@@ -17,7 +17,7 @@
                 <v-card-text>
                     <Core-Error :error="error"></Core-Error>
                     <form @submit.prevent="createUser()">
-                        {{$required}}
+
                         <v-text-field :rules="[$required]" v-model="form.username" class="mt-4" prepend-inner-icon="em em-bust_in_silhouette" outlined label="ชื่อผู้ใช้งาน" hide-details></v-text-field>
                         <v-text-field type="password" v-model="form.password" class="mt-4" prepend-inner-icon="em em-lock" outlined label="รหัสผ่าน" hide-details></v-text-field>
                         <v-text-field type="password" v-model="form.password_confirm" class="mt-4" prepend-inner-icon="em em-lock" outlined label="ยืนยันรหัสผ่าน" hide-details></v-text-field>
@@ -28,7 +28,7 @@
                         <v-checkbox v-model="form.foreigner" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ชาวต่างชาติ" hide-details></v-checkbox>
                         <v-spacer></v-spacer>
                         <v-checkbox v-model="formPermission.is_superuser" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ผู้ใช้พิเศษ" hide-details></v-checkbox>
-                        <v-checkbox v-model="formPermission.is_staff" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ผู้ช่วยแอดมิน" hide-details></v-checkbox>
+                        <v-checkbox v-model="formPermission.is_staff" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="แอดมิน" hide-details></v-checkbox>
                         <br>
                         <div class="flex"> 
                             <v-spacer></v-spacer>
@@ -89,11 +89,11 @@ export default {
                     value: ''
                 },
                 {
-                    txt: 'แอดมิน',
+                    txt: 'ซุปเปอร์แอดมิน',
                     value: '&is_superuser=true'
                 },
                 {
-                    txt: 'ผู้ช่ายแอดมิน',
+                    txt: 'แอดมิน',
                     value: '&is_staff=true'
                 },
                 {

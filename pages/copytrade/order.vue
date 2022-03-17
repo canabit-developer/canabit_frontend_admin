@@ -8,7 +8,7 @@ table
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">Order </h2>
+            <h2 class="text-3xl font-semibold"><v-icon class="mr-2" >em em-clipboard</v-icon> Order </h2>
             <v-spacer></v-spacer>
             <!-- <v-btn @click="openDialog()">Add Data</v-btn> -->
         </v-toolbar>
@@ -32,7 +32,8 @@ table
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon class="mr-2" >em em-clipboard</v-icon>
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}} Order
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -40,15 +41,13 @@ table
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()"> 
-                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="code" hide-details></v-text-field>
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.product_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="product_id" hide-details></v-text-field>
-                        <v-text-field v-model="form.user_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_id" hide-details></v-text-field>
+                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="em em-1234" outlined label="รหัส" hide-details></v-text-field>
+                        <v-text-field v-model="form.product_id" class="mt-4" prepend-inner-icon="em em-male-technologist" outlined label="ชื่อ Master" hide-details></v-text-field>
+                        <v-text-field v-model="form.user_id" class="mt-4" prepend-inner-icon="em em-bust_in_silhouette" outlined label="ผู้ใช้" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success"><v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -68,33 +67,33 @@ export default {
         return {
             items: [],
             headers: [{
-                    text: "id",
+                    text: "ลำดับ",
                     value: "id"
                 }, {
-                    text: "code",
+                    text: "รหัส",
                     value: "code"
                 },
 
                 {
-                    text: "user",
+                    text: "ผู้ใช้",
                     value: "user_full"
                 },
                 {
-                    text: "product",
+                    text: "ชื่อ Master",
                     value: "product_name"
                 },
                 {
-                    text: "product image",
+                    text: "รูป Master",
                     value: "product_image"
                 },
                 {
-                    text: "created_at",
+                    text: "วันที่สร้าง",
                     value: "created_at"
                 }, {
-                    text: "updated_at",
+                    text: "วันที่อัพเดทล่าสุด",
                     value: "updated_at"
                 }, {
-                    text: "Action",
+                    text: "การจัดการ",
                     value: "actions"
                 }
             ],
