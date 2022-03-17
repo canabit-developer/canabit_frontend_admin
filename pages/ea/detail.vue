@@ -11,7 +11,11 @@
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
-                <v-btn @click="openDialogUpdate(item.id)">Update Data</v-btn>
+                <div class="flex">
+                    <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
+                        <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                </div>
             </template>
 
         </v-data-table>
@@ -20,6 +24,7 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
+                    <v-icon class="mr-2" >em em-chart_with_upwards_trend</v-icon>
                     {{(form.id)?"แก้ไข":"เพิ่ม"}} Request Test
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
@@ -29,12 +34,8 @@
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
 
-                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="code" hide-details></v-text-field>
-                        <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="link" hide-details></v-text-field>
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.product_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="product_id" hide-details></v-text-field>
-                        <v-text-field v-model="form.user_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_id" hide-details></v-text-field>
+                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="em em-1234" outlined label="รหัสสินค้า" hide-details></v-text-field>
+                        <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="em em-link" outlined label="ที่อยู่ url" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
@@ -61,7 +62,7 @@ export default {
                 text: "ลำดับ",
                 value: "id"
             }, {
-                text: "ชื่อ Request Test ",
+                text: "รหัสสินค้า",
                 value: "code"
             }, {
                 text: "ที่อยู่ url",
@@ -73,10 +74,10 @@ export default {
                 text: "วันที่อัพเดทล่าสุด",
                 value: "updated_at"
             }, {
-                text: "product_id",
+                text: "ชื่อสินค้า",
                 value: "product_id"
             }, {
-                text: "user_id",
+                text: "ชื่อผู้ใช้",
                 value: "user_id"
             }, {
                 text: "การจัดการ",
