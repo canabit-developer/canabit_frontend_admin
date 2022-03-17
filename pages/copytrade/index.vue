@@ -26,9 +26,9 @@
                 <UI-IsActive :active="item.is_active"></UI-IsActive>
             </template>
         </v-data-table>
-        <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
+        <!-- <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination> -->
 
-        <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
+        <v-dialog v-model="dialog" v-if="dialog" scrollable persistent :overlay="false" max-width="1000px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
                     {{(form.id)?"Update":"Create"}} Data
@@ -38,7 +38,7 @@
                     </v-btn>
                 </v-card-title>
                 <v-card-text>
-                    
+
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
@@ -48,10 +48,13 @@
                         <br><br><span>image</span><input ref="cp_image" type="file"><br><br>
                         <br>
                         <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
-
-                        <Core-Editor v-model="form.detail"></Core-Editor>
+                        <br><br>
+                        <Core-Editor v-model="form.detail"></Core-Editor> <br><br>
+                        <v-textarea name="name" label="Api" v-model="form.api_chart"></v-textarea>
                         <!-- <v-jsoneditor :plus="true" v-model="raw" :options="{ mode: 'code' }" height="400px"  />
                         <pre>{{raw}}</pre> -->
+                        <br> <br>
+                        <CopyTrade-Chart :data="form.chart"></CopyTrade-Chart>
                         <div class="mt-4 flex">
                             <v-spacer />
                             <v-btn type="submit" color="success">Submit</v-btn>
@@ -79,45 +82,46 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
-                value: "id"
-            }, {
-                text: "name",
-                value: "name"
-            }, 
-            // {
-            //     text: "sub_title",
-            //     value: "sub_title"
-            // },
-             {
-                text: "image",
-                value: "image"
-            }, {
-                text: "is_active",
-                value: "is_active"
-            }, {
-                text: "created_at",
-                value: "created_at"
-            }, {
-                text: "updated_at",
-                value: "updated_at"
-            }, {
-                text: "Action",
-                value: "actions"
-            }],
+                    text: "id",
+                    value: "id"
+                }, {
+                    text: "name",
+                    value: "name"
+                },
+                // {
+                //     text: "sub_title",
+                //     value: "sub_title"
+                // },
+                {
+                    text: "image",
+                    value: "image"
+                }, {
+                    text: "is_active",
+                    value: "is_active"
+                }, {
+                    text: "created_at",
+                    value: "created_at"
+                }, {
+                    text: "updated_at",
+                    value: "updated_at"
+                }, {
+                    text: "Action",
+                    value: "actions"
+                }
+            ],
             page: 1,
             maxPage: 3,
             search: "",
             form: {
-                
+
             },
             dialog: false,
             brokers: [],
             response: false,
-            raw:{
-                    test:"sasa",
-                    ss:"asas"
-                }
+            raw: {
+                test: "sasa",
+                ss: "asas"
+            }
         };
     },
     async created() {
