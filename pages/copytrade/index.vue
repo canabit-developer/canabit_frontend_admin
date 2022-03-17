@@ -3,11 +3,11 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">Copy Trade </h2>
+            <h2 class="text-3xl font-semibold"> <v-icon>em em-bookmark_tabs</v-icon> Copy Trade </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
-        </v-toolbar>
-        <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
+            <v-btn @click="openDialog()"> <v-icon class="mr-2" > em em-file_folder</v-icon> เพิ่ม Copy Trade</v-btn>
+        </v-toolbar> 
+        <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                 <div class="flex">
@@ -31,7 +31,8 @@
         <v-dialog v-model="dialog" v-if="dialog" scrollable persistent :overlay="false" max-width="1000px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                     <v-icon class="mr-4">em em-bookmark_tabs</v-icon>
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}} Copy Trade
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -43,21 +44,27 @@
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
                         </div>
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="sub_title" hide-details></v-text-field>
-                        <br><br><span>image</span><input ref="cp_image" type="file"><br><br>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-male-technologist" outlined label="ชื่อ Master" hide-details></v-text-field>
+                        <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="em em-page_facing_up" outlined label="รายละเอียด" hide-details></v-text-field>
+                        <br><br> <v-icon class="mr-2" >em em-camera </v-icon> <span>รูป Master : </span><input ref="cp_image" type="file"><br><br>
                         <br>
+<<<<<<< HEAD
                         <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="Broker" hide-details></v-select>
                         <br><br>
                         <Core-Editor v-model="form.detail"></Core-Editor> <br><br>
                         <v-textarea name="name" label="Api" v-model="form.api_chart"></v-textarea>
+=======
+                        <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-bank" outlined label="Broker" hide-details></v-select>
+
+                        <Core-Editor v-model="form.detail"></Core-Editor>
+>>>>>>> d8ff19dc965cf53602e4172cfcf5cc3eb00c9488
                         <!-- <v-jsoneditor :plus="true" v-model="raw" :options="{ mode: 'code' }" height="400px"  />
                         <pre>{{raw}}</pre> -->
                         <br> <br>
                         <CopyTrade-Chart :data="form.chart"></CopyTrade-Chart>
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -110,7 +117,7 @@ export default {
                 }
             ],
             page: 1,
-            maxPage: 3,
+            maxPage: 10,
             search: "",
             form: {
 

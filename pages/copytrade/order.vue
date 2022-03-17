@@ -99,7 +99,7 @@ export default {
                 }
             ],
             page: 1,
-            maxPage: 3,
+            maxPage: 10,
             search: "",
             form: {},
             dialog: false,

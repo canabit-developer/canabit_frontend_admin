@@ -3,13 +3,14 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar color="transparent" flat>
-            <h2 class="text-3xl  ">ผู้ใช้งาน</h2>
+            <h2 class="text-3xl  "> <v-icon class="mr-2">em em-female-office-worker</v-icon> ผู้ใช้งาน</h2>
             <v-spacer></v-spacer>
-            <v-btn @click="dialog = true" color="success">เพิ่มผู้ใช้</v-btn>
+            <v-btn @click="dialog = true" color="success"> <v-icon class="mr-2 ">em em-bust_in_silhouette</v-icon> เพิ่มผู้ใช้</v-btn>
         </v-toolbar>
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
+                    <v-icon class="mr-2"  >em em-female-office-worker</v-icon>
                     เพิ่มผู้ใช้<v-spacer></v-spacer>
                     <v-btn @click="dialog = false" color="error">ยกเลิก</v-btn>
                 </v-card-title>
@@ -17,21 +18,21 @@
                     <Core-Error :error="error"></Core-Error>
                     <form @submit.prevent="createUser()">
                         {{$required}}
-                        <v-text-field :rules="[$required]" v-model="form.username" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="username" hide-details></v-text-field>
-                        <v-text-field type="password" v-model="form.password" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="password" hide-details></v-text-field>
-                        <v-text-field type="password" v-model="form.password_confirm" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="password_confirm" hide-details></v-text-field>
-                        <v-text-field v-model="form.first_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="first_name" hide-details></v-text-field>
-                        <v-text-field v-model="form.last_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="last_name" hide-details></v-text-field>
-                        <v-text-field v-model="form.email" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="email" hide-details></v-text-field>
-                        <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="phone_number" hide-details></v-text-field>
-                        <v-checkbox v-model="form.foreigner" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="foreigner" hide-details></v-checkbox>
+                        <v-text-field :rules="[$required]" v-model="form.username" class="mt-4" prepend-inner-icon="em em-bust_in_silhouette" outlined label="ชื่อผู้ใช้งาน" hide-details></v-text-field>
+                        <v-text-field type="password" v-model="form.password" class="mt-4" prepend-inner-icon="em em-lock" outlined label="รหัสผ่าน" hide-details></v-text-field>
+                        <v-text-field type="password" v-model="form.password_confirm" class="mt-4" prepend-inner-icon="em em-lock" outlined label="ยืนยันรหัสผ่าน" hide-details></v-text-field>
+                        <v-text-field v-model="form.first_name" class="mt-4" prepend-inner-icon="em em-man-frowning" outlined label="ชื่อจริง" hide-details></v-text-field>
+                        <v-text-field v-model="form.last_name" class="mt-4" prepend-inner-icon="em em-man-frowning" outlined label="นามสกุล" hide-details></v-text-field>
+                        <v-text-field v-model="form.email" class="mt-4" prepend-inner-icon="em em-email" outlined label="อีเมล" hide-details></v-text-field>
+                        <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="em em-iphone" outlined label="หมายเลขโทรศัพท์" hide-details></v-text-field>
+                        <v-checkbox v-model="form.foreigner" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ชาวต่างชาติ" hide-details></v-checkbox>
                         <v-spacer></v-spacer>
-                        <v-checkbox v-model="formPermission.is_superuser" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="is_superuser" hide-details></v-checkbox>
-                        <v-checkbox v-model="formPermission.is_staff" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="is_staff" hide-details></v-checkbox>
+                        <v-checkbox v-model="formPermission.is_superuser" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ผู้ใช้พิเศษ" hide-details></v-checkbox>
+                        <v-checkbox v-model="formPermission.is_staff" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ผู้ช่วยแอดมิน" hide-details></v-checkbox>
                         <br>
                         <div class="flex"> 
                             <v-spacer></v-spacer>
-                            <v-btn type="submit" color="success">Create User</v-btn>
+                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -39,13 +40,13 @@
         </v-dialog>
 
         <div>
-            <v-text-field v-model="search" outlined label="ค้นหา"></v-text-field>
-            <v-btn @click="startup()" color="success">ค้นหา</v-btn>
+            <v-text-field v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
+            <v-btn @click="startup()" color="success"> <v-icon class="mr-2" >em em-mag_right</v-icon> ค้นหา</v-btn>
 
-            <v-select outlined :items="permissionList" v-model="permission" item-text="txt" item-value="value" label="ระดับผู้ใช้งาน" @change="startup()"></v-select>
-            <v-select outlined :items="foreignerList" v-model="foreigner" item-text="txt" item-value="value" label="ที่อยู่ผู้ใช้" @change="startup()"></v-select>
-            <v-select outlined :items="blacklistList" v-model="blacklist" item-text="txt" item-value="value" label="blacklist" @change="startup()"></v-select>
-            <v-select outlined :items="register_byList" v-model="register_by" item-text="txt" item-value="value" label="register_byList" @change="startup()"></v-select>
+            <v-select outlined :items="permissionList" v-model="permission" item-text="txt" item-value="value" prepend-inner-icon="em em-busts_in_silhouette" label="ระดับผู้ใช้งาน" @change="startup()"></v-select>
+            <v-select outlined :items="foreignerList" v-model="foreigner" item-text="txt" item-value="value" prepend-inner-icon="em em-house_buildings" label="ที่อยู่ผู้ใช้" @change="startup()"></v-select>
+            <v-select outlined :items="blacklistList" v-model="blacklist" item-text="txt" item-value="value" prepend-inner-icon="em em-no_entry_sign" label="blacklist" @change="startup()"></v-select>
+            <v-select outlined :items="register_byList" v-model="register_by" item-text="txt" item-value="value" prepend-inner-icon="em em-desktop_computer" label="การสมัครสมาชิก" @change="startup()"></v-select>
 
         </div>
 
@@ -84,19 +85,19 @@ export default {
 
             permission: '',
             permissionList: [{
-                    txt: 'all',
+                    txt: 'ทั้งหมด',
                     value: ''
                 },
                 {
-                    txt: 'admin',
+                    txt: 'แอดมิน',
                     value: '&is_superuser=true'
                 },
                 {
-                    txt: 'staff',
+                    txt: 'ผู้ช่ายแอดมิน',
                     value: '&is_staff=true'
                 },
                 {
-                    txt: 'user',
+                    txt: 'ผู้ใช้ทั่วไป',
                     value: '&is_superuser=false&is_staff=false'
                 },
             ],

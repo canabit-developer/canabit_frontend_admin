@@ -3,11 +3,11 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold">Indicator</h2>
+            <h2 class="text-3xl font-semibold"><v-icon class="mr-2" >em em-arrow_double_down</v-icon> Indicator</h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()"><v-icon class="mr-2 " > em em-file_folder</v-icon> เพิ่ม Indicator</v-btn>
         </v-toolbar>
-        <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
+        <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
@@ -32,7 +32,8 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon class="mr-2" >em em-arrow_double_down</v-icon>
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}} Indicator
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -43,15 +44,15 @@
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
                         </div>
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <br><br><span>image</span><input ref="indicator_image" type="file"><br><br>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-arrows_clockwise" outlined label="ชื่อ Indicator " hide-details></v-text-field>
+                        <br><br><v-icon class="mr-2" >em em-camera </v-icon><span>รูป Indicator : </span><input ref="indicator_image" type="file"><br><br>
                         <br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
-                        <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="link" hide-details></v-text-field>
+                        <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="em em-paperclip" outlined label="ที่อยู่ url" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -71,33 +72,33 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "name",
+                text: "ชื่อ Indicator",
                 value: "name"
             }, {
-                text: "image",
+                text: "รูป Indicator",
                 value: "image"
             }, {
-                text: "is_active",
+                text: "สถานะ",
                 value: "is_active"
             }, {
-                text: "created_at",
+                text: "วันนที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดทล่าสุด",
                 value: "updated_at"
 
             }, {
-                text: "link",
+                text: "ที่อยู่ url",
                 value: "link"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,
-            maxPage: 3,
+            maxPage: 10,
             search: "",
             form: {},
             dialog: false,

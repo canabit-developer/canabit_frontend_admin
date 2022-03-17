@@ -3,6 +3,7 @@
     <v-text-field
       @change="startup()"
       v-model="search"
+      prepend-inner-icon="em em-mag_right"
       outlined
       label="ค้นหา"
     ></v-text-field>
@@ -23,19 +24,19 @@ export default {
     return {
       items: [],
       headers: [
-        { text: "id", value: "id" },
+        { text: "ลำดับ", value: "id" },
         { text: "code", value: "code" },
-        { text: "status", value: "status" },
-        { text: "remark", value: "remark" },
-        { text: "created_at", value: "created_at" },
-        { text: "updated_at", value: "updated_at" },
-        { text: "account_type_id", value: "account_type_id" },
-        { text: "broker_id", value: "broker_id" },
+        { text: "สถานะ", value: "status" },
+        { text: "หมายเหตุ", value: "remark" },
+        { text: "วันที่สร้าง", value: "created_at" },
+        { text: "วันที่อัพเดทล่าสุด", value: "updated_at" },
+        { text: "ประเภทบัญชี", value: "account_type_id" },
+        { text: "ชื่อ Broker", value: "broker_id" },
         { text: "product_id", value: "product_id" },
         { text: "user_id", value: "user_id" },
       ],
       page: 1,
-      maxPage: 3,
+      maxPage: 10,
       search: "",
     };
   },
