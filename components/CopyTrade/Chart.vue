@@ -1,6 +1,6 @@
 <template>
 <div v-if="response">
-    <div id="chart" v-if="data"> 
+    <div id="chart" v-if="data">
         <highcharts :options="chartOptions" :highcharts="hcInstance"></highcharts>
         <!-- <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart> -->
 
@@ -41,37 +41,40 @@ export default {
     },
     methods: {
         async startup() {
-            // this.series = this.data.series 
-            this.chartOptions = {
-                "type": "column",
-                series: this.data.series,
+            if (this.data) {
 
-                xAxis: {
-                    categories: this.data.categories,
-                },
-                chartData: this.data.chartData,
-                "showInLegend": this.data.showInLegend, 
-                "title": "Monthly Gain(Change)",
-                plotOptions: {
-                    series: {
-                        pointWidth: 60,
-                        colorByPoint: true,
-                        dataLabels: {
-                            format: '{point.y} %',
-                            enabled: true,
-                            align: 'right',
-                            color: '#FFFFFF',
-                            x: -5,
-                            y: 3,
-                            style: {
-                                fontSize: "16px",
-                                color: '#fff',
-                                fontWeight: '500',
+                // this.series = this.data.series 
+                this.chartOptions = {
+                    "type": "column",
+                    series: this.data.series,
+
+                    xAxis: {
+                        categories: this.data.categories,
+                    },
+                    chartData: this.data.chartData,
+                    "showInLegend": this.data.showInLegend,
+                    "title": "Monthly Gain(Change)",
+                    plotOptions: {
+                        series: {
+                            pointWidth: 60,
+                            colorByPoint: true,
+                            dataLabels: {
+                                format: '{point.y} %',
+                                enabled: true,
+                                align: 'right',
+                                color: '#FFFFFF',
+                                x: -5,
+                                y: 3,
+                                style: {
+                                    fontSize: "16px",
+                                    color: '#fff',
+                                    fontWeight: '500',
+                                }
                             }
                         }
-                    }
-                },
+                    },
 
+                }
             }
         }
     }
