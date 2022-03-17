@@ -12,7 +12,9 @@
                 <v-card-title primary-title>
                     <v-icon class="mr-2"  >em em-female-office-worker</v-icon>
                     เพิ่มผู้ใช้<v-spacer></v-spacer>
-                    <v-btn @click="dialog = false" color="error">ยกเลิก</v-btn>
+                    <v-btn @click="dialog = false" text color="error">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
                 </v-card-title>
                 <v-card-text>
                     <Core-Error :error="error"></Core-Error>
