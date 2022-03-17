@@ -68,15 +68,13 @@
                 <UserMenu-NavbarLink path="/signals" title="Indicator" icon="mdi-broadcast"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/copytrade" title=" Copy Trade" icon="mdi-crown-outline"></UserMenu-NavbarLink>
             </UserMenu-NavMenuGroup> --> 
-            <UserMenu-NavMenuSectionTitle title="USER SETTING"></UserMenu-NavMenuSectionTitle>
-            <UserMenu-NavbarLink path="/accountstatus" title="History Account" icon="em em-timer_clock"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/account" title="Account Setting" icon="em em-wrench"></UserMenu-NavbarLink>
+
         </v-list>
 
         <template v-slot:append>
             <div>
                 <div @click="logout()">
-                    <UserMenu-NavbarLink path="/logout" title="Logout" icon="em em-door"></UserMenu-NavbarLink>
+                    <UserMenu-NavbarLink path="/logout" title="ออกจากระบบ" icon="em em-door"></UserMenu-NavbarLink>
                 </div>
 
             </div>
