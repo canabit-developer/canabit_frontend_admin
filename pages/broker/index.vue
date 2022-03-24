@@ -10,6 +10,9 @@
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
+                  <v-btn x-small fab class="m-2" @click="$router.push(`/broker/detail?id=${item.id}`)" color="warning">
+                    <v-icon>mdi-eye</v-icon>
+                </v-btn>
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn>

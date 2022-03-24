@@ -50,7 +50,8 @@ export default {
     plugins: [
         '@tools/validate',
         '@plugins/editor.js',
-        '@plugins/varible.ts'
+        '@plugins/varible.ts',
+        '@plugins/table.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

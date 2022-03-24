@@ -52,9 +52,9 @@
 
         </div>
 
-        <v-data-table :headers="headers" :items="items.results" class="elevation-1"></v-data-table>
+        <v-data-table :headers="headers" :items="items" class="elevation-1"></v-data-table>
         {{page}}
-        <v-pagination v-model="page" :length="items.count/3"></v-pagination>
+        <!-- <v-pagination v-model="page" :length="items.count/3"></v-pagination> -->
     </div>
 
 </div>
@@ -161,14 +161,14 @@ export default {
     methods: {
         async startup() {
             this.items = await Core.getHttp(`/api/account/userprofile/?page=${this.page}&search=${this.search}${this.permission}${this.foreigner}${this.blacklist}${this.register_by}`)
-            if (this.items.results.length > 0) {
-                this.headers = _.map(Object.keys(this.items.results[0]), (r) => {
-                    return {
-                        text: r,
-                        value: r
-                    }
-                })
-            }
+            // if (this.items.results.length > 0) {
+            //     this.headers = _.map(Object.keys(this.items.results[0]), (r) => {
+            //         return {
+            //             text: r,
+            //             value: r
+            //         }
+            //     })
+            // }
         },
         async createUser() {
             await Web.switchLoad(true)

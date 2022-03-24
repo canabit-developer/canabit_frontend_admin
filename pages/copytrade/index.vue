@@ -47,7 +47,7 @@
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
-                                <v-checkbox v-model="form.is_active" label="Active"></v-checkbox>
+                            <v-checkbox v-model="form.is_active" label="Active"></v-checkbox>
                         </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-male-technologist" outlined label="ชื่อ Master" hide-details></v-text-field>
                         <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="em em-page_facing_up" outlined label="รายละเอียด" hide-details></v-text-field>
@@ -57,10 +57,20 @@
                         <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-bank" outlined label="Broker" hide-details></v-select>
                         <br><br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
-                            <br>  <br>
+                        <br> <br>
                         <v-textarea outlined name="name" label="Api" v-model="form.api_chart"></v-textarea>
                         <br> <br>
-                        <CopyTrade-Chart :data="form.chart"></CopyTrade-Chart>
+                        <CopyTrade-Chart :data="form.chart"></CopyTrade-Chart> 
+                        <v-card>
+                            <v-list dense>
+                            <v-list-item v-for="dd,i in rawData" :key='i'>
+                                <v-list-item-content>{{dd}}:</v-list-item-content>
+                                <v-list-item-content class="align-end">
+                                    {{ form.statstitle[dd] }}
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
+                        </v-card>
                         <div class="mt-4 flex">
                             <v-spacer />
                             <v-btn type="submit" color="success">
@@ -129,7 +139,9 @@ export default {
             raw: {
                 test: "sasa",
                 ss: "asas"
-            }
+            },
+            rawData: []
+
         };
     },
     async created() {
@@ -143,7 +155,7 @@ export default {
             await this.closeDialog();
         },
         async store() {
-            let data = await Core.postHttpAlert(`/api/admincopytrade/product/`, this.form)
+            let data = await Core.postHttpAlert(`/api/admincopytrade/productdetail/`, this.form)
             if (data.id) {
                 await this.updateImage(data.id)
                 await this.startup();
@@ -154,13 +166,13 @@ export default {
             if (image) {
                 let formData = new FormData()
                 formData.append('image', image);
-                let update = await Core.putImageHttp(`/api/admincopytrade/product/${id}/`, formData)
+                let update = await Core.putImageHttp(`/api/admincopytrade/productdetail/${id}/`, formData)
 
             }
         },
         async update() {
             delete this.form.image
-            let data = await Core.putHttpAlert(`/api/admincopytrade/product/${this.form.id}/`, this.form)
+            let data = await Core.putHttpAlert(`/api/admincopytrade/productdetail/${this.form.id}/`, this.form)
             await this.updateImage(data.id)
             await this.startup();
         },
@@ -172,7 +184,8 @@ export default {
             this.dialog = true;
         },
         async openDialogUpdate(id) {
-            this.form = await Core.getHttp(`/api/admincopytrade/product/${id}/`)
+            this.form = await Core.getHttp(`/api/admincopytrade/productdetail/${id}/`)
+            this.rawData = _.keys(this.form.statstitle);
             this.dialog = true;
         },
         async closeDialog() {
