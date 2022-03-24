@@ -58,6 +58,7 @@
                         <br><br>
                         <Core-Editor v-model="form.detail"></Core-Editor>
                         <br> <br>
+                         <v-textarea outlined name="name" label="Url" v-model="form.url"></v-textarea>
                         <v-textarea outlined name="name" label="Api" v-model="form.api_chart"></v-textarea>
                         <br> <br>
                         <CopyTrade-Chart :data="form.chart"></CopyTrade-Chart> 
