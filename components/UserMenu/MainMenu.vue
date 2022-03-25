@@ -56,6 +56,7 @@
             <v-divider></v-divider>
             <UserMenu-NavMenuGroup icon="em em-arrow_double_down" title="indicator">
                 <UserMenu-NavbarLink class="ml-4" path="/indicator" title="Product" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
+                  <UserMenu-NavbarLink class="ml-4" path="/indicator/detail" title="Detail" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
                 <!-- <UserMenu-NavbarLink path="/ea/user/" title="user" icon="mdi-broadcast"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink path="/ea/detail/" title=" Request Test" icon="mdi-crown-outline"></UserMenu-NavbarLink> -->
             </UserMenu-NavMenuGroup> 

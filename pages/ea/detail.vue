@@ -8,14 +8,7 @@
             <v-spacer></v-spacer>
             <v-btn @click="openDialog()"> <v-icon class="mr-2 " > em em-file_folder</v-icon> เพิ่ม Request Test</v-btn>
         </v-toolbar>
-        {{$comma(xx)}}
-          <Core-Comma
-          outlined
-          dense
-          label="sdsd"
-      v-model="xx" 
-    
-    />
+   
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
