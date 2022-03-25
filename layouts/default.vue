@@ -5,7 +5,7 @@
 
     <v-main >
         <!-- <Core-Notification /> -->
-        <div class=" md:ml-28 md:mr-28 mt-16">
+        <div class=" ">
             <Nuxt />
         </div>
 

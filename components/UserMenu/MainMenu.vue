@@ -1,8 +1,8 @@
 <template>
 <div class="bg-main">
-    <v-app-bar app flat absolute color="transparent">
-        <div class="boxed-container w-full">
-            <div class="d-flex align-center mx-6">
+    <v-app-bar app flat absolute color="red">
+        <div class=" ">
+            <div class=" align-center ">
                 <!-- Left Content -->
                 <v-app-bar-nav-icon class="d-block d-lg-none me-2" @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
 
@@ -10,9 +10,9 @@
 
             </div>
         </div>
-    </v-app-bar>
+    </v-app-bar> 
 
-    <v-navigation-drawer app floating width="260" class="app-navigation-menu bg-main shadow-2xl" :right="$vuetify.rtl" v-model="isDrawerOpen">
+    <v-navigation-drawer app expand-on-hover    :right="$vuetify.rtl" v-model="isDrawerOpen">
         <div class="vertical-nav-header d-flex items-center ps-6 pe-5 pt-5 pb-2">
             <router-link to="/" class="d-flex align-center text-decoration-none w-full">
                 <center>

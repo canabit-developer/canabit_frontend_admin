@@ -34,7 +34,7 @@ export default {
             { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap' },
         ],
         script: [
-            { src: 'https://cdn.tailwindcss.com' }
+            { src: 'https://cdn.tailwindcss.com' },
         ]
     },
 
@@ -45,13 +45,17 @@ export default {
         'vueditor/dist/style/vueditor.min.css'
         // '@assets/styles.scss'
     ],
+    js: [
+
+    ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         '@tools/validate',
         '@plugins/editor.js',
         '@plugins/varible.ts',
-        '@plugins/table.js'
+        '@plugins/table.js',
+        '@plugins/money.js'
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

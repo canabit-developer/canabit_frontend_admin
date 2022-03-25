@@ -8,6 +8,14 @@
             <v-spacer></v-spacer>
             <v-btn @click="openDialog()"> <v-icon class="mr-2 " > em em-file_folder</v-icon> เพิ่ม Request Test</v-btn>
         </v-toolbar>
+        {{$comma(xx)}}
+          <Core-Comma
+          outlined
+          dense
+          label="sdsd"
+      v-model="xx" 
+    
+    />
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
             <template v-slot:item.actions="{ item }">
@@ -23,7 +31,7 @@
                 </div>
             </template>
         </v-data-table>
-        <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
+        <!-- <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination> -->
 
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
@@ -58,9 +66,18 @@
 import {
     Core
 } from "@/vuexes/core";
+import {
+    Web
+} from "@/vuexes/web";
 export default {
     data: () => {
         return {
+            options: {
+      locale: "en-US", 
+      length: 1000,
+      precision: 0
+    },
+            xx:55555,
             items: [],
             headers: [{
                 text: "ลำดับ",
@@ -103,7 +120,9 @@ export default {
     },
     methods: {
         async startup() {
+            await Web.switchLoad(true)
             this.items = await Core.getHttp(`/api/adminea/requesttest/?page=${this.page}&search=${this.search}`);
+            await Web.switchLoad(false)
         },
         async store() {
 
