@@ -39,6 +39,7 @@
             <!-- <UserMenu-NavbarLink path="/" title="หน้าแรก" icon="em em-house"></UserMenu-NavbarLink> -->
             <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="em em-female-office-worker"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/kyc" title="kyc" icon="em em-clipboard"></UserMenu-NavbarLink>
+             <UserMenu-NavbarLink path="/tier" title="tier" icon="em em-trophy"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/store" title="store" icon="em em-trophy"></UserMenu-NavbarLink>
             <v-divider></v-divider>
@@ -87,6 +88,7 @@
 </template>
 
 <script>
+
 import {
     Auth
 } from '@/vuexes/auth'

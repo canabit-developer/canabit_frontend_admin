@@ -7,12 +7,12 @@
                 <img class="h-16 w-16" :src="$url+broker.image" alt="">{{broker.name}}
             </h2>
             <v-spacer></v-spacer>
-          
+
         </v-toolbar><br>
         <vue-excel-editor width="100%" v-model="tests">
 
         </vue-excel-editor>
-   
+
     </div>
 </div>
 </template>
@@ -21,7 +21,9 @@
 import {
     Core
 } from "@/vuexes/core";
-
+import {
+    Web
+} from '@/vuexes/web'
 export default {
     components: {},
     data() {
@@ -72,10 +74,13 @@ export default {
         })
     },
     async created() {
+        await Web.switchLoad(true)
         await this.load();
+        await Web.switchLoad(false)
     },
     methods: {
         async load() {
+
             this.broker = await Core.getHttp(`/api/finance/broker/${this.$route.query.id}/`)
             this.tests = JSON.parse(this.broker.raw_data)
         }
