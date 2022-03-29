@@ -8,7 +8,7 @@
             <v-btn @click="openDialog()"> <v-icon class="mr-2 " > em em-file_folder</v-icon>  เพิ่ม Broker</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
-        <v-data-table :headers="headers" :items="items.results" class="elevation-1">
+        <v-data-table :headers="headers" :items="items" class="elevation-1">
             <template v-slot:item.actions="{ item }">
                   <v-btn x-small fab class="m-2" @click="$router.push(`/broker/detail?id=${item.id}`)" color="warning">
                     <v-icon>mdi-eye</v-icon>
@@ -27,7 +27,7 @@
                 <UI-IsActive :active="item.is_active"></UI-IsActive>
             </template>
         </v-data-table>
-        <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
+ 
 
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
@@ -105,7 +105,7 @@ export default {
     methods: {
         async startup() {
 
-            this.items = await Core.getHttp(`/api/adminfinanace/broker/?page=${this.page}&search=${this.search}`);
+            this.items = await Core.getHttp(`/api/finance/broker/?page=${this.page}&search=${this.search}`);
             this.accountTypes = await Core.getHttp(`/api/finance/accounttype/`)
             await this.closeDialog()
         },

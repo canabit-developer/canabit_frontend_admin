@@ -5,7 +5,7 @@
 
     <v-main >
         <!-- <Core-Notification /> -->
-        <div class=" ">
+        <div class="p-10 ">
             <Nuxt />
         </div>
 
@@ -17,6 +17,7 @@
 <script>
 import {
     Auth} from '@/vuexes/auth'
+import {Cash} from '@/vuexes/cash'
 export default {
     name: 'DefaultLayout',
     data() {
@@ -34,6 +35,7 @@ export default {
     methods: {
         async initial() {
             await Auth.checkToken();
+            await Cash.getEnv();
             this.user = await Auth.setUser();
             await this.checkUser();
             this.response = (this.user.id) ? true : false; 

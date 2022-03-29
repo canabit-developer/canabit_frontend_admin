@@ -1,6 +1,6 @@
 <template>
 <div class="bg-main">
-    <v-app-bar app flat absolute color="red">
+    <v-app-bar app flat absolute  >
         <div class=" ">
             <div class=" align-center ">
                 <!-- Left Content -->
@@ -12,7 +12,7 @@
         </div>
     </v-app-bar> 
 
-    <v-navigation-drawer app expand-on-hover    :right="$vuetify.rtl" v-model="isDrawerOpen">
+    <v-navigation-drawer app   v-model="isDrawerOpen">
         <div class="vertical-nav-header d-flex items-center ps-6 pe-5 pt-5 pb-2">
             <router-link to="/" class="d-flex align-center text-decoration-none w-full">
                 <center>
@@ -40,6 +40,7 @@
             <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="em em-female-office-worker"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/kyc" title="kyc" icon="em em-clipboard"></UserMenu-NavbarLink>
              <UserMenu-NavbarLink path="/tier" title="tier" icon="em em-trophy"></UserMenu-NavbarLink>
+             <UserMenu-NavbarLink path="/commission" title="commission" icon="em em-bank"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/store" title="store" icon="em em-trophy"></UserMenu-NavbarLink>
             <v-divider></v-divider>
