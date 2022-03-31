@@ -1,16 +1,16 @@
 <template>
 <div class="bg-main">
-    <v-app-bar app flat absolute  >
+    <!-- <v-app-bar app flat absolute  >
         <div class=" ">
             <div class=" align-center ">
-                <!-- Left Content -->
+         
                 <v-app-bar-nav-icon class="d-block d-lg-none me-2" @click="isDrawerOpen = !isDrawerOpen"></v-app-bar-nav-icon>
 
                 <v-spacer></v-spacer>
 
             </div>
         </div>
-    </v-app-bar> 
+    </v-app-bar>  -->
 
     <v-navigation-drawer app   v-model="isDrawerOpen">
         <div class="vertical-nav-header d-flex items-center ps-6 pe-5 pt-5 pb-2">
