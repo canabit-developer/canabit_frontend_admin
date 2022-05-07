@@ -1,6 +1,8 @@
 <template>
-<div v-if='response'>
-    <pre>{{lists}}</pre>
+<div   >
+    <Test ref="testc" />
+ {{text}}
+    <v-btn @click="setDataPlus" color="success">text</v-btn>
 </div>
 </template>
 
@@ -16,16 +18,27 @@ export default {
     data() {
         return ({
             response: false,
-            lists: []
+            lists: [],
+            text:''
         })
     },
-    async created() {
+ 
+    async mounted() {
+         this.response = true;
         await this.startup();
-        this.response = true;
+       
     },
     methods: {
         async startup() {
+          console.log( this.$refs.testc.text)
+          this.$refs.testc.text = "555+"
+            console.log( this.$refs.testc.text)
 
+        this.text = this.$refs.testc.text
+        
+        },
+        async setDataPlus(){
+         await this.$refs.testc.setData(1)
         }
     },
     computed: {

@@ -2,7 +2,7 @@
 <v-app class="bg-main" v-if="response">
     <Core-Loading></Core-Loading>
     <UserMenu-MainMenu></UserMenu-MainMenu>
-
+    <Test ref="loading" />
     <v-main >
         <!-- <Core-Notification /> -->
         <div class="p-10 ">

@@ -3,14 +3,19 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar color="transparent" flat>
-            <h2 class="text-3xl  "> <v-icon class="mr-2">em em-female-office-worker</v-icon> ผู้ใช้งาน</h2>
+            <h2 class="text-3xl  ">
+                <v-icon class="mr-2">em em-female-office-worker</v-icon> ผู้ใช้งาน
+            </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="dialog = true" color="success"> <v-icon class="mr-2 ">em em-bust_in_silhouette</v-icon> เพิ่มผู้ใช้</v-btn>
+            <v-btn outlined @click="dialog = true" color="success">
+                <v-icon class="mr-2 ">mdi-account-multiple-plus</v-icon> เพิ่มผู้ใช้
+            </v-btn>
         </v-toolbar>
+
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    <v-icon class="mr-2"  >em em-female-office-worker</v-icon>
+                    <v-icon class="mr-2">em em-female-office-worker</v-icon>
                     เพิ่มผู้ใช้<v-spacer></v-spacer>
                     <v-btn @click="dialog = false" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -19,7 +24,6 @@
                 <v-card-text>
                     <Core-Error :error="error"></Core-Error>
                     <form @submit.prevent="createUser()">
-
                         <v-text-field :rules="[$required]" v-model="form.username" class="mt-4" prepend-inner-icon="em em-bust_in_silhouette" outlined label="ชื่อผู้ใช้งาน" hide-details></v-text-field>
                         <v-text-field type="password" v-model="form.password" class="mt-4" prepend-inner-icon="em em-lock" outlined label="รหัสผ่าน" hide-details></v-text-field>
                         <v-text-field type="password" v-model="form.password_confirm" class="mt-4" prepend-inner-icon="em em-lock" outlined label="ยืนยันรหัสผ่าน" hide-details></v-text-field>
@@ -32,28 +36,72 @@
                         <v-checkbox v-model="formPermission.is_superuser" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="ผู้ใช้พิเศษ" hide-details></v-checkbox>
                         <v-checkbox v-model="formPermission.is_staff" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="แอดมิน" hide-details></v-checkbox>
                         <br>
-                        <div class="flex"> 
+                        <div class="flex">
                             <v-spacer></v-spacer>
-                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
+                            <v-btn type="submit" color="success">
+                                <v-icon class="mr-2">em em-floppy_disk</v-icon> บันทึกข้อมูล
+                            </v-btn>
                         </div>
                     </form>
                 </v-card-text>
             </v-card>
         </v-dialog>
 
-        <div>
-            <v-text-field v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
-            <v-btn @click="startup()" color="success"> <v-icon class="mr-2" >em em-mag_right</v-icon> ค้นหา</v-btn>
-
-            <v-select outlined :items="permissionList" v-model="permission" item-text="txt" item-value="value" prepend-inner-icon="em em-busts_in_silhouette" label="ระดับผู้ใช้งาน" @change="startup()"></v-select>
-            <v-select outlined :items="foreignerList" v-model="foreigner" item-text="txt" item-value="value" prepend-inner-icon="em em-house_buildings" label="ที่อยู่ผู้ใช้" @change="startup()"></v-select>
-            <v-select outlined :items="blacklistList" v-model="blacklist" item-text="txt" item-value="value" prepend-inner-icon="em em-no_entry_sign" label="blacklist" @change="startup()"></v-select>
-            <v-select outlined :items="register_byList" v-model="register_by" item-text="txt" item-value="value" prepend-inner-icon="em em-desktop_computer" label="การสมัครสมาชิก" @change="startup()"></v-select>
-
+        <div class="  w-full mt-6">
+            <div class="flex w-full">
+                <v-text-field dense v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
+                <v-btn outlined   class="ml-2" @click="startup()" color="primary">
+                    <v-icon small class="mr-2">em em-mag_right</v-icon> ค้นหา
+                </v-btn>
+            </div>
+            <div class="flex">
+                <v-select class="ml-2" dense outlined :items="permissionList" v-model="permission" item-text="txt" item-value="value" prepend-inner-icon="em em-busts_in_silhouette" label="ระดับผู้ใช้งาน" @change="startup()"></v-select>
+                <v-select class="ml-2" dense outlined :items="foreignerList" v-model="foreigner" item-text="txt" item-value="value" prepend-inner-icon="em em-house_buildings" label="ที่อยู่ผู้ใช้" @change="startup()"></v-select>
+                <v-select class="ml-2" dense outlined :items="blacklistList" v-model="blacklist" item-text="txt" item-value="value" prepend-inner-icon="em em-no_entry_sign" label="blacklist" @change="startup()"></v-select>
+                <v-select class="ml-2" dense outlined :items="register_byList" v-model="register_by" item-text="txt" item-value="value" prepend-inner-icon="em em-desktop_computer" label="การสมัครสมาชิก" @change="startup()"></v-select>
+            </div> 
         </div>
 
-        <v-data-table :headers="headers" :items="items" class="elevation-1"></v-data-table>
-        {{page}}
+        <v-data-table :headers="headers" :items="items" class="elevation-1">
+            <template v-slot:item.id="{ item,index }">
+                {{index+1}}
+            </template>
+            <template v-slot:item.username="{ item }">
+                <div class="flex items-center p-2 " :class="(item.blacklist)?'bg-red-200':''">
+                    <img v-if="item.image_profile" class="rounded-full h-10 w-10" :src="$url+item.image_profile" alt="">
+                    <img v-else class="rounded-full h-10 w-10" src="https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" alt="">
+                    <div class="ml-2">
+                        <span class="font-semibold"> {{item.username}} </span> <br>
+                        <span class="text-gray-400 text-sm">{{item.email}}</span>
+                        <span class="text-red-600 font-semibold" v-if="item.blacklist"><br>[X BlackList]</span>
+                    </div>
+
+                </div>
+            </template>
+            <template v-slot:item.name="{ item }">
+                <span class="font-semibold">{{item.first_name}} {{item.last_name}} </span> <br>
+                <span v-if="item.display_name" class="text-gray-400 text-sm">@{{item.display_name}}</span>
+            </template>
+            <template v-slot:item.address="{ item }">
+                <v-chip small v-if="item.foreigner">
+                    ชาวต่างชาติ
+                </v-chip>
+                <span v-if="item.phone_number"> เบอร์ {{item.phone_number}}</span><br>
+                {{item.address}} {{(item.province)?`จ.${item.province}`:``}} {{(item.amphur)?`อ.${item.amphur}`:``}} {{(item.district)?`ต.${item.district}`:``}} {{item.zipcode}}
+            </template>
+            <template v-slot:item.permission="{ item }">
+                <UI-IsChecks text="Admin" :active="item.is_superuser"></UI-IsChecks>
+                <UI-IsChecks text="Staff" :active="item.is_staff"></UI-IsChecks>
+            </template>
+            <template v-slot:item.is_active="{ item }">
+                <UI-IsChecks text="ยืนยันอีเมล์" :active="item.is_active"></UI-IsChecks>
+                <!-- <UI-IsChecks text="ยืนยันอีเมล์" ></UI-IsChecks>
+                {{item.is_staff}} -->
+            </template>
+            <template v-slot:item.active="{ item }">
+
+            </template>
+        </v-data-table>
         <!-- <v-pagination v-model="page" :length="items.count/3"></v-pagination> -->
     </div>
 
@@ -74,10 +122,58 @@ import _ from 'lodash'
 export default {
     data() {
         return ({
-            
+
             response: false,
             items: [],
-            headers: [],
+            headers: [{
+                    "text": "ลำดับ",
+                    "value": "id"
+                },
+                {
+                    "text": "ผู้ใช้",
+                    "value": "username",
+                    "width": "300"
+                },
+                {
+                    "text": "ชื่อ-สกุล",
+                    "value": "name",
+                    "width": "200"
+                },
+                {
+                    "text": "ที่อยู่",
+                    "value": "address",
+                    "width": "200"
+                },
+                {
+                    "text": "เพอร์มิชชัน",
+                    "value": "permission"
+                },
+                {
+                    "text": "ยืนยันอีเมล์",
+                    "value": "is_active"
+                },
+
+                {
+                    "text": "สมัครสมาชิกจาก",
+                    "value": "register_by"
+                },
+                {
+                    "text": "เข้าสู่ระบบล่าสุด",
+                    "value": "last_login"
+                },
+                {
+                    "text": "สร้างเมื่อ",
+                    "value": "created_at"
+                },
+                {
+                    "text": "อัพเดทล่าสุด",
+                    "value": "updated_at"
+                },
+                {
+                    "text": "จัดการ",
+                    "value": "active"
+                }
+            ],
             form: {},
             formPermission: {},
             dialog: false,
@@ -183,7 +279,7 @@ export default {
             }
             await Web.switchLoad(false)
         },
-        async updatePermission(userId){
+        async updatePermission(userId) {
             this.formPermission.is_active = true
             let user = await Core.putHttp(`/api/account/userprofile/${userId}/`, this.formPermission)
         }
