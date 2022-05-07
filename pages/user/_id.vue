@@ -16,33 +16,37 @@
         </center>
         <br><br>
         <form @submit.prevent="update()">
+          <v-text-field v-model="form.first_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="first_name" hide-details></v-text-field>
+            <v-text-field v-model="form.last_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="last_name" hide-details></v-text-field>
             <v-text-field v-model="form.address" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="address" hide-details></v-text-field>
-            <v-text-field v-model="form.amphur" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="amphur" hide-details></v-text-field>
-            <v-checkbox v-model="form.blacklist" label="blacklist"></v-checkbox>
+                       <v-text-field v-model="form.province" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="province" hide-details></v-text-field>
+
+           <v-text-field v-model="form.amphur" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="amphur" hide-details></v-text-field>
+                       <v-text-field v-model="form.district" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="district" hide-details></v-text-field>
+            <v-text-field v-model="form.zipcode" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="zipcode" hide-details></v-text-field>
+
             <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
             <v-text-field v-model="form.date_joined" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="date_joined" hide-details></v-text-field>
             <v-text-field v-model="form.display_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="display_name" hide-details></v-text-field>
-            <v-text-field v-model="form.district" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="district" hide-details></v-text-field>
             <v-text-field v-model="form.email" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="email" hide-details></v-text-field>
-            <v-text-field v-model="form.first_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="first_name" hide-details></v-text-field>
+          
             <v-checkbox v-model="form.foreigner" label="foreigner"></v-checkbox>
             <v-text-field v-model="form.image_profile" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="image_profile" hide-details></v-text-field>
             <v-checkbox v-model="form.is_staff" label="is_staff"></v-checkbox>
             <v-checkbox v-model="form.is_superuser" label="is_superuser"></v-checkbox>
             <v-text-field v-model="form.last_login" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="last_login" hide-details></v-text-field>
-            <v-text-field v-model="form.last_name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="last_name" hide-details></v-text-field>
+        
             <v-text-field v-model="form.other_referral_code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="other_referral_code" hide-details></v-text-field>
             <v-text-field v-model="form.password" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="password" hide-details></v-text-field>
             <v-text-field v-model="form.phone_number" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="phone_number" hide-details></v-text-field>
-            <v-text-field v-model="form.province" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="province" hide-details></v-text-field>
             <v-text-field v-model="form.register_by" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="register_by" hide-details></v-text-field>
             <v-text-field v-model="form.status" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="status" hide-details></v-text-field>
             <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
             <v-text-field v-model="form.username" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="username" hide-details></v-text-field>
-            <v-text-field v-model="form.zipcode" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="zipcode" hide-details></v-text-field>
+             <v-checkbox v-model="form.blacklist" label="blacklist"></v-checkbox>
             <div class="mt-4 flex">
                 <v-spacer />
-                <v-btn type="submit" color="success">Submit</v-btn>
+                <v-btn type="submit" color="success">บันทึกข้อมูล</v-btn>
             </div>
         </form>
 
