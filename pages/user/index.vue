@@ -49,10 +49,7 @@
 
         <div class="  w-full mt-6">
             <div class="flex w-full">
-                <v-text-field dense v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
-                <v-btn outlined   class="ml-2" @click="startup()" color="primary">
-                    <v-icon small class="mr-2">em em-mag_right</v-icon> ค้นหา
-                </v-btn>
+                <v-text-field @change="startup()" dense v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
             </div>
             <div class="flex">
                 <v-select class="ml-2" dense outlined :items="permissionList" v-model="permission" item-text="txt" item-value="value" prepend-inner-icon="em em-busts_in_silhouette" label="ระดับผู้ใช้งาน" @change="startup()"></v-select>
@@ -99,7 +96,7 @@
                 {{item.is_staff}} -->
             </template>
             <template v-slot:item.active="{ item }">
-
+                <v-btn small color="warning" @click="$router.push(`/user/${item.id}/`)"  >แก้ไขข้อมูล</v-btn>
             </template>
         </v-data-table>
         <!-- <v-pagination v-model="page" :length="items.count/3"></v-pagination> -->
@@ -248,7 +245,7 @@ export default {
 
         })
     },
-    async created() {
+    async created() { 
         await Web.switchLoad(true)
         await this.startup();
         this.response = true;

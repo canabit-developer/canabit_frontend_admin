@@ -3,12 +3,17 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> <v-icon class="mr-2">em em-clipboard</v-icon> KYC </h2>
+            <h2 class="text-3xl font-semibold">
+                <v-icon class="mr-2">em em-clipboard</v-icon> KYC
+            </h2>
             <v-spacer></v-spacer>
             <!-- <v-btn @click="openDialog()">Add Data</v-btn> -->
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
+            <template v-slot:item.id="{ item, index }">
+                {{index+1}}
+            </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
                     <v-icon>mdi-pencil</v-icon>
@@ -38,10 +43,9 @@
                 <div>
                     <UI-IsActive :active="item.user_verified"></UI-IsActive>
                 </div>
-            </template>
-
+            </template> 
         </v-data-table>
-        <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
+        <!-- <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination> -->
 
         <v-dialog v-model="dialog" fullscreen scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
@@ -57,7 +61,9 @@
                     <div class="flex flex-col md:flex-row">
                         <div class="w-full md:w-1/2 p-4">
                             <form @submit.prevent="(form.id)?update():store()">
-                                <h2> <v-icon class="mr-2" >em em-bust_in_silhouette</v-icon> {{form.user_full}}</h2>
+                                <h2>
+                                    <v-icon class="mr-2">em em-bust_in_silhouette</v-icon> {{form.user_full}}
+                                </h2>
                                 <!-- <v-text-field v-model="form.image_card" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="image_card" hide-details></v-text-field>
                                 <v-text-field v-model="form.image_selfie" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="image_selfie" hide-details></v-text-field>
                                 -->
@@ -84,18 +90,24 @@
                                 <v-checkbox label="ชื่อ-สกุล ไม่ตรงกับบัตรประจำตัวประชาชน" v-model="form.user_verified_name_error"></v-checkbox>
                                 <div class="mt-4 flex">
                                     <v-spacer />
-                                    <v-btn type="submit" color="success"><v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
+                                    <v-btn type="submit" color="success">
+                                        <v-icon class="mr-2">em em-floppy_disk</v-icon> บันทึกข้อมูล
+                                    </v-btn>
                                 </div>
                             </form>
                         </div>
                         <div class="w-full md:w-1/ p-4">
-                            <h2> <v-icon class="mr-2"> em em-camera</v-icon> ภาพถ่ายสำเนาบัตรประจำตัวประชาชน</h2>
+                            <h2>
+                                <v-icon class="mr-2"> em em-camera</v-icon> ภาพถ่ายสำเนาบัตรประจำตัวประชาชน
+                            </h2>
                             <img v-if="form.image_card" :src="$url+form.image_card" alt="">
                             <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
                             <br><br>
-                            <h2> <v-icon class="mr-2"> em em-camera_with_flash</v-icon> ภาพถ่าย Selfie กับ ประจำตัวประชาชน</h2>
-                            <img  v-if="form.image_selfie"  :src="$url+form.image_selfie" alt="">
-                             <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
+                            <h2>
+                                <v-icon class="mr-2"> em em-camera_with_flash</v-icon> ภาพถ่าย Selfie กับ ประจำตัวประชาชน
+                            </h2>
+                            <img v-if="form.image_selfie" :src="$url+form.image_selfie" alt="">
+                            <h3 v-else class="p-4 bg-gray-100"> ไม่มีภาพ</h3>
                         </div>
                     </div>
 
@@ -200,7 +212,7 @@ export default {
             delete this.form.image_selfie
             let user = await Core.getHttp(`/api/adminaccount/userprofile/${this.form.user}/`)
             let data = await Core.putHttpAlert(`/api/adminaccount/kyc/${this.form.id}/`, this.form)
-            await Core.sentEmail('ผลการตรวจสอบข้อมูลส่วนตัว',user.email,`
+            await Core.sentEmail('ผลการตรวจสอบข้อมูลส่วนตัว', user.email, `
                 ผลการตรวจสอล ${(this.form.user_verified)?'ผ่าน':'ไม่ผ่าน'}   
                 ข้อมูล
                 1.ภาพถ่ายสำเนาบัตรประจำตัวประชาชน ${(this.form.user_verified_image_card_error)?'ไม่ผ่าน':'ผ่าน'} 
