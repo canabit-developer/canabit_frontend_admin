@@ -17,9 +17,14 @@
             <template v-slot:item.actions="{ item }">
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
                     <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-
+                </v-btn> 
             </template>
+
+               <template v-slot:item.user_full="{ item }">
+                 <div>
+                     {{item.user_full}} 
+                 </div>
+            </template> 
             <template v-slot:item.image_card="{ item }">
                 <div class="p-4"><img :src="item.image_card" class="w-20 h-auto shadow-xl" /></div>
             </template>
@@ -133,7 +138,8 @@ export default {
                 },
                 {
                     text: "ผู้ใช้",
-                    value: "user_full"
+                    value: "user_full",
+                    width:300
                 },
                 {
                     text: "เลขประจำตัวประชาชน",
@@ -212,13 +218,13 @@ export default {
             delete this.form.image_selfie
             let user = await Core.getHttp(`/api/adminaccount/userprofile/${this.form.user}/`)
             let data = await Core.putHttpAlert(`/api/adminaccount/kyc/${this.form.id}/`, this.form)
-            await Core.sentEmail('ผลการตรวจสอบข้อมูลส่วนตัว', user.email, `
-                ผลการตรวจสอล ${(this.form.user_verified)?'ผ่าน':'ไม่ผ่าน'}   
-                ข้อมูล
-                1.ภาพถ่ายสำเนาบัตรประจำตัวประชาชน ${(this.form.user_verified_image_card_error)?'ไม่ผ่าน':'ผ่าน'} 
-                2.ภาพถ่าย selfie  และ  บัตรประจำตัวประชาชน  ${(this.form.user_verified_image_selfie_error)?'ไม่ผ่าน':'ผ่าน'}  
-                3.เลขบัตรประชาชน และ บัตรประจำตัวประชาชน  ${(this.form.user_verified_id_error)?'ไม่ตรงกัน':'ตรงกัน'} 
-                4.ชื่อ-สกุล  และ บัตรประจำตัวประชาชน  ${(this.form.user_verified_name_error)?'ไม่ตรงกัน':'ตรงกัน'} 
+            await Core.sentEmail('ผลการตรวจสอบข้อมูลส่วนตัว การยืนยันตัวตน(KYC)', user.email, `
+                <h1 >ผลการตรวจสอบข้อมูลส่วนตัว การยืนยันตัวตน(KYC) : ${(this.form.user_verified)?'<span style="color:green!important;">ผ่าน</span>':'<span style="color:red!important;">ไม่ผ่าน</span>'}  </h1>   <br>
+                <h2><b>ข้อมูล</b></h2> 
+                <h3>1.ภาพถ่ายสำเนาบัตรประจำตัวประชาชน : ${(this.form.user_verified_image_card_error)?'ไม่ผ่าน':'ผ่าน'} </h3> <br>
+                <h3>2.ภาพถ่าย selfie  และ  บัตรประจำตัวประชาชน  :  ${(this.form.user_verified_image_selfie_error)?'ไม่ผ่าน':'ผ่าน'} </h3>  <br>
+                <h3>3.เลขบัตรประชาชน และ บัตรประจำตัวประชาชน  :  ${(this.form.user_verified_id_error)?'ไม่ตรงกัน':'ตรงกัน'}</h3>  <br>
+               <h3>4.ชื่อ-สกุล  และ บัตรประจำตัวประชาชน  :  ${(this.form.user_verified_name_error)?'ไม่ตรงกัน':'ตรงกัน'}</h3>  <br>
             `)
             await this.startup();
         },
