@@ -1,6 +1,6 @@
 import Vue from 'vue' 
 
-Vue.prototype.$url  = "https://www.admin-canabit.tk"// `http://192.168.0.110:8000/` 
+Vue.prototype.$url  = `http://192.168.0.110:8000/`  //"https://www.admin-canabit.tk"//
 Vue.prototype.$hover = 'transition transform hover:-translate-y-2 motion-reduce:transition-none motion-reduce:hover:transform-none '
 Vue.prototype.$card = 'rounded-xl shadow-2xl '
 Vue.prototype.$comma = function Comma(Num:any)

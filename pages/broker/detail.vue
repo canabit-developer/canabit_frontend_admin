@@ -39,8 +39,11 @@
             </v-tab>
             <v-tab-item>
                 <div v-if="tabs == 1">
-                    <vue-excel-editor width="100%" v-model="raw">
-                    </vue-excel-editor>
+                    <div v-if="raw">
+                        <vue-excel-editor width="100%" v-model="raw">
+                        </vue-excel-editor>
+                    </div>
+                    <!-- -->
                 </div>
             </v-tab-item>
 
@@ -122,11 +125,11 @@ export default {
                     value: "partners"
                 },
             ],
-            response:false,
+            response: false,
         })
     },
     async created() {
-       
+
         await this.load();
         this.response = true
 
@@ -138,8 +141,8 @@ export default {
                 this.broker = await Core.getHttp(`/api/adminfinanace/broker/${this.$route.query.id}/`)
                 this.raw = JSON.parse(this.broker.raw_data)
                 this.rawData = _.filter(this.broker.data, {
-                        broker: this.chooseBroker
-                    })
+                    broker: this.chooseBroker
+                })
 
                 this.commissions = await Core.getHttp(`/api/commission/admincommision/?types=Broker`)
                 await this.generateData()
@@ -152,39 +155,42 @@ export default {
         },
 
         async generateData() {
-            this.data = await _.map(this.rawData, (r) => {
-                let obj = {}
-                let myTier = _.find(this.tiers, (d) => {
-                    return (d.id == r.tier)
-                })
-                let myCommission = _.find(this.commissions, {
-                    tier: r.tier,
-                    broker: this.chooseBroker
-                })
-                let broker = _.find(this.brokers, {
-                    id: r.broker
-                })
-                obj['user'] = r.user
-                obj['tier_name'] = (myTier) ? myTier.name : '-'
-                obj['broker'] = (broker) ? broker.name : '-'
-                obj['client_account_type'] = r.client_account_type
-                obj['volume_lots'] = r.volume_lots
-                obj['reward_usd'] = r.reward_usd
-                if (myCommission) {
-                    obj['master_percent'] = myCommission.type_values_master
-                    obj['master_value'] = myCommission.master
-                    obj['point_cashback'] = this.calculatePointMaster(myCommission, r.volume_lots, r.reward_usd)
-                    obj['partners'] = _.map(r.partners, (ri) => {
-                        let objIn = ri
-                        objIn['partner_val'] = myCommission.child
-                        objIn['point_cashback'] = this.calculatePointChild(myCommission, r.volume_lots, r.reward_usd)
-                        return objIn
+            try {
+                this.data = await _.map(this.rawData, (r) => {
+                    let obj = {}
+                    let myTier = _.find(this.tiers, (d) => {
+                        return (d.id == r.tier)
                     })
+                    let myCommission = _.find(this.commissions, {
+                        tier: r.tier,
+                        broker: this.chooseBroker
+                    })
+                    let broker = _.find(this.brokers, {
+                        id: r.broker
+                    })
+                    obj['user'] = r.user
+                    obj['tier_name'] = (myTier) ? myTier.name : '-'
+                    obj['broker'] = (broker) ? broker.name : '-'
+                    obj['client_account_type'] = r.client_account_type
+                    obj['volume_lots'] = r.volume_lots
+                    obj['reward_usd'] = r.reward_usd
+                    if (myCommission) {
+                        obj['master_percent'] = myCommission.type_values_master
+                        obj['master_value'] = myCommission.master
+                        obj['point_cashback'] = this.calculatePointMaster(myCommission, r.volume_lots, r.reward_usd)
+                        obj['partners'] = _.map(r.partners, (ri) => {
+                            let objIn = ri
+                            objIn['partner_val'] = myCommission.child
+                            objIn['point_cashback'] = this.calculatePointChild(myCommission, r.volume_lots, r.reward_usd)
+                            return objIn
+                        })
+                    }
 
-                }
+                    return obj
+                })
+            } catch (error) {
 
-                return obj
-            })
+            }
         },
 
         calculatePointMaster(commission, volume_lots, reward_usd) {

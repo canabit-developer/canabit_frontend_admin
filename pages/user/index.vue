@@ -71,8 +71,7 @@
                         <span class="font-semibold"> {{item.username}} </span> <br>
                         <span class="text-gray-400 text-sm">{{item.email}}</span>
                         <span class="text-red-600 font-semibold" v-if="item.blacklist"><br>[X BlackList]</span>
-                    </div>
-
+                    </div> 
                 </div>
             </template>
             <template v-slot:item.name="{ item }">

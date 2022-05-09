@@ -3,9 +3,13 @@
     <Bg-User></Bg-User>
     <div class="relative " v-if="response">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-chart</v-icon> EA Products </h2>
+            <h2 class="text-3xl font-semibold">
+                <v-icon class="mr-4">em em-chart</v-icon> EA Products
+            </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()"> <v-icon class="mr-2 " > em em-file_folder</v-icon> เพิ่มสินค้า EA</v-btn>
+            <v-btn @click="openDialog()">
+                <v-icon class="mr-2 "> em em-file_folder</v-icon> เพิ่มสินค้า EA
+            </v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" prepend-inner-icon="em em-mag_right" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items.results" class="elevation-1">
@@ -43,11 +47,12 @@
                     <form @submit.prevent="(form.id)?update():store()">
                         <div v-if="form.id">
                             <img :src="form.image" alt="">
-                                <v-checkbox v-model="form.is_active" label="Active"></v-checkbox>
+                            <v-checkbox v-model="form.is_active" label="Active"></v-checkbox>
                         </div>
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-basket" outlined label="ชื่อสินค้า EA" hide-details></v-text-field>
                         <v-text-field v-model="form.sub_title" class="mt-4" prepend-inner-icon="em em-page_facing_up" outlined label="รายละเอียด" hide-details></v-text-field>
-                        <br><br><v-icon class="mr-2" >em em-camera </v-icon><span>รูปสินค้า EA : </span><input ref="ea_image" type="file"><br><br>
+                        <br><br>
+                        <v-icon class="mr-2">em em-camera </v-icon><span>รูปสินค้า EA : </span><input ref="ea_image" type="file"><br><br>
                         <v-text-field type="number" v-model="form.price" class="mt-4" prepend-inner-icon="em em-dollar" outlined label="ราคา" hide-details></v-text-field>
                         <v-select multiple v-model="form.broker" :items="brokers" item-text="name" item-value="id" class="mt-4" prepend-inner-icon="em em-bank" outlined label="Broker" hide-details></v-select>
                         <br>
@@ -55,7 +60,9 @@
                         <!-- <pre>{{form}}</pre> -->
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success"> <v-icon class="mr-2" >em em-floppy_disk</v-icon> บันทึกข้อมูล</v-btn>
+                            <v-btn type="submit" color="success">
+                                <v-icon class="mr-2">em em-floppy_disk</v-icon> บันทึกข้อมูล
+                            </v-btn>
                         </div>
                     </form>
                 </v-card-text>

@@ -44,6 +44,7 @@
             <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/store" title="store" icon="em em-trophy"></UserMenu-NavbarLink>
             <v-divider></v-divider>
+             <UserMenu-NavbarLink path="/promotion" title="Promotion" icon="em em-trophy"></UserMenu-NavbarLink>
             <UserMenu-NavMenuGroup icon="em em-chart" title="EA">
                 <UserMenu-NavbarLink class="ml-4" path="/ea" title="Product" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink class="ml-4" path="/ea/user/" title="user" icon="em em-busts_in_silhouette"></UserMenu-NavbarLink>
