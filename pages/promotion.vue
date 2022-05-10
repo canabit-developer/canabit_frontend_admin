@@ -1,16 +1,11 @@
-api
-
-table
- Create
-
 <template>
 <div>
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> </h2>
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-2">em em-loudspeaker</v-icon> Promotion </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()">เพิ่มชื่อโปรโมชั่น</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
@@ -29,7 +24,7 @@ table
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon>em em-loudspeaker</v-icon>{{(form.id)?"แก้ไข":"สร้าง"}}Promotion
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -37,15 +32,13 @@ table
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
-                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="code" hide-details></v-text-field>
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.discount" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="discount" hide-details></v-text-field>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-ticket-percent" outlined label="ชื่อส่วนลด" hide-details></v-text-field>
+                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-barcode-scan" outlined label="โค้ดส่วนลด" hide-details></v-text-field>
+                        <v-text-field v-model="form.discount" class="mt-4" prepend-inner-icon="mdi-ticket-percent" outlined label="ส่วนลด" hide-details></v-text-field>
 
-                        <v-checkbox v-model="form.is_active" label="is_active"></v-checkbox>
-                        <v-text-field v-model="form.is_point" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="is_point" hide-details></v-text-field>
-                        <v-text-field v-model="form.link_to" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="link_to" hide-details></v-text-field>
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
+                        <v-checkbox v-model="form.is_active" label="เปิดการใช้งาน"></v-checkbox>
+                        <v-text-field v-model="form.is_point" class="mt-4" prepend-inner-icon="em em-copyright" outlined label="พ้อย" hide-details></v-text-field>
+                        
 
                         <div class="mt-4 flex">
                             <v-spacer />
@@ -69,34 +62,37 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "code",
-                value: "code"
-            }, {
-                text: "created_at",
-                value: "created_at"
-            }, {
-                text: "discount",
-                value: "discount"
-            }, {
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
-            }, {
-                text: "is_active",
+            },{
+                text: "โค้ดส่วนลด",
+                value: "code"
+            },  {
+                text: "ส่วนลด",
+                value: "discount"
+            },  {
+                text: "สถานะ",
                 value: "is_active"
             }, {
-                text: "is_point",
+                text: "พ้อย",
                 value: "is_point"
-            }, {
-                text: "link_to",
-                value: "link_to"
-            }, {
-                text: "name",
+            },
+            //  {
+            //     text: "link_to",
+            //     value: "link_to"
+            // }, 
+            {
+                text: "ชื่อโปรโมชั่น",
                 value: "name"
+            },
+            {
+                text: "วันที่สร้าง",
+                value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดท",
                 value: "updated_at"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,

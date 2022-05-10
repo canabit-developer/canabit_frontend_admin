@@ -3,9 +3,10 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-credit_card</v-icon> Tier </h2>
             <h2 class="text-3xl font-semibold"> </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()">เพิ่มเทียร์</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
@@ -28,7 +29,7 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon>em em-credit_card</v-icon> {{(form.id)?"แก้ไข":"เพิ่ม"}} Tier
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -37,15 +38,15 @@
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
 
-                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-text-field v-model="form.length" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="length" hide-details></v-text-field>
+                        <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-sports_medal" outlined label="ระบบเทียร์" hide-details></v-text-field>
+                        <v-text-field v-model="form.length" class="mt-4" prepend-inner-icon="em em-registered" outlined label="พ้อย" hide-details></v-text-field>
                         <br>
                         <center>
                             <v-color-picker v-model="form.color" dot-size="25" swatches-max-height="200"></v-color-picker> 
                         </center>
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success">บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -65,25 +66,25 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "name",
+                text: "ระดับเทียร์",
                 value: "name"
             }, {
-                text: "length",
+                text: "พ้อย",
                 value: "length"
             }, {
-                text: "created_at",
+                text: "วันที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดท",
                 value: "updated_at"
             }, {
-                text: "color",
+                text: "สี",
                 value: "color"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,

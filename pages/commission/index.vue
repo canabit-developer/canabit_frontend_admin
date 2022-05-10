@@ -3,9 +3,10 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
+            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-moneybag</v-icon> Commissiom </h2>
             <h2 class="text-3xl font-semibold"> </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()">คอมมิชชั่น</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
@@ -23,7 +24,7 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    <v-icon>em em-moneybag</v-icon>{{(form.id)?"แก้ไข":"เพิ่ม"}}Commissiom
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -31,15 +32,15 @@
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
-                        <v-select :items="brokers" item-text="name" item-value="id" v-model="form.broker" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="broker_id" hide-details></v-select>
-                        <v-select :items="tiers" item-text="name" item-value="id" v-model="form.tier" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="tier_id" hide-details></v-select>
+                        <v-select :items="brokers" item-text="name" item-value="id" v-model="form.broker" class="mt-4" prepend-inner-icon="em em-chart" outlined label="โบรกเกอร์" hide-details></v-select>
+                        <v-select :items="tiers" item-text="name" item-value="id" v-model="form.tier" class="mt-4" prepend-inner-icon="em em-sports_medal" outlined label="ระดับเทียร์" hide-details></v-select>
 
-                        <v-select :items="['EA','Broker','Indication']" v-model="form.types" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="types" hide-details></v-select>
+                        <v-select :items="['EA','Broker','Indication']" v-model="form.types" class="mt-4" prepend-inner-icon="em em-spiral_note_pad" outlined label="ประเภท" hide-details></v-select>
 
-                        <v-checkbox v-model="form.type_values_master" label="Master %"></v-checkbox>
-                        <v-text-field v-model="form.master" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="master" hide-details></v-text-field>
-                        <v-checkbox v-model="form.type_values_child" label="Child %"></v-checkbox>
-                        <v-text-field v-model="form.child" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="child" hide-details></v-text-field>
+                        <v-checkbox v-model="form.type_values_master" label="เปอร์เซ็นต์มาสเตอร์"></v-checkbox>
+                        <v-text-field v-model="form.master" class="mt-4" prepend-inner-icon="em em-female-technologist" outlined label="มาสเตอร์" hide-details></v-text-field>
+                        <v-checkbox v-model="form.type_values_child" label="เปอร์เซ็นต์ผู้ต่อใต้"></v-checkbox>
+                        <v-text-field v-model="form.child" class="mt-4" prepend-inner-icon="em em-man-man-girl" outlined label="ผู้ต่อใต้" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
@@ -66,37 +67,37 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "types",
+                text: "ประเภท",
                 value: "types"
             }, {
-                text: "type_values_master",
+                text: "เพอร์มิชชันมาสเตอร์",
                 value: "type_values_master"
             }, {
-                text: "master",
+                text: "ค่าคอมมิชชันมาสเตอร์",
                 value: "master"
             }, {
-                text: "type_values_child",
+                text: "เพอมิชชั่นผู้ต่อใต้",
                 value: "type_values_child"
             }, {
-                text: "child",
+                text: "ค่าคอมมิชชันผู้ต่อใต้",
                 value: "child"
             }, {
-                text: "created_at",
+                text: "วันที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
-                value: "updated_at"
+                text: "วันที่อัพเดท",
+                value: "updated_at"    
             }, {
-                text: "broker",
+                text: "โบรกเกอร์",
                 value: "broker"
             }, {
-                text: "tier",
+                text: "ระดับเทียร์",
                 value: "tier"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,

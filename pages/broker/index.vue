@@ -33,7 +33,7 @@
             <v-card>
                 <v-card-title primary-title >
                     <v-icon class="m-4">em em-bank</v-icon>
-                    {{(form.id)?"Update":"เพิ่ม"}} Broker
+                    {{(form.id)?"แก้ไข":"เพิ่ม"}}Broker
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>

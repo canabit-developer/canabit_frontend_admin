@@ -39,12 +39,12 @@
             <!-- <UserMenu-NavbarLink path="/" title="หน้าแรก" icon="em em-house"></UserMenu-NavbarLink> -->
             <UserMenu-NavbarLink path="/user" title="ผู้ใช้งาน" icon="em em-female-office-worker"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/kyc" title="kyc" icon="em em-clipboard"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/tier" title="tier" icon="em em-trophy"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/commission" title="commission" icon="em em-bank"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/tier" title="tier" icon="em em-credit_card"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/commission" title="commission" icon="em em-moneybag"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/store" title="store" icon="em em-trophy"></UserMenu-NavbarLink>
             <v-divider></v-divider>
-            <UserMenu-NavbarLink path="/promotion" title="Promotion" icon="em em-trophy"></UserMenu-NavbarLink>
+            <UserMenu-NavbarLink path="/promotion" title="Promotion" icon="em em-loudspeaker"></UserMenu-NavbarLink>
             <UserMenu-NavMenuGroup icon="em em-chart" title="EA">
                 <UserMenu-NavbarLink class="ml-4" path="/ea" title="Product" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
                 <UserMenu-NavbarLink class="ml-4" path="/ea/user/" title="user" icon="em em-busts_in_silhouette"></UserMenu-NavbarLink>
