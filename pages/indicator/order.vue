@@ -8,7 +8,31 @@
             <v-btn @click="openDialog()">Add Data</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
-        <v-data-table :headers="headers" :items="items.results" class="elevation-1">
+        <v-data-table   :headers="headers" :items="items" class="elevation-1">
+            <template v-slot:item.id="{ item,index }">
+                {{index+1}}
+            </template>
+            <template v-slot:item.code="{ item }">
+                <div class="flex items-center p-2 ">
+                    <img v-if="item.product_image" class=" -full h-10 w-10" :src="$url+item.product_image" alt="">
+                    <img v-else class="rounded-full h-10 w-10" src="https://png.pngtree.com/png-vector/20190704/ourlarge/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" alt="">
+                    <div class="ml-2">
+                        <span class="font-semibold"> {{item.product_name}} </span> <br>
+                        <span class="text-gray-400 text-sm">{{item.code}}</span>
+                        <span class="text-red-600 font-semibold" v-if="item.blacklist"><br>[X BlackList]</span>
+                    </div>
+                </div>
+            </template>
+            <template v-slot:item.user="{ item }">
+                <div class="flex items-center p-2 ">
+                    <div class="ml-2">
+                        <span class="font-semibold"> {{item.user_full}} </span> <br>
+                        <span class="text-gray-400 text-sm"> <span v-if="item.user_data.phone_number"> เบอร์ {{item.user_data.phone_number}}</span><br>
+                            {{item.user_data.address}} {{(item.user_data.province)?`จ.${item.user_data.province}`:``}} {{(item.user_data.amphur)?`อ.${item.user_data.amphur}`:``}} {{(item.user_data.district)?`ต.${item.user_data.district}`:``}} {{item.user_data.zipcode}}</span>
+
+                    </div>
+                </div>
+            </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
                     <v-icon>mdi-pencil</v-icon>
@@ -67,23 +91,20 @@ export default {
                 text: "code",
                 value: "code"
             }, {
+                text: "user_id",
+                value: "user"
+            }, {
                 text: "created_at",
                 value: "created_at"
             }, {
                 text: "updated_at",
                 value: "updated_at"
             }, {
-                text: "product_id",
-                value: "product"
-            }, {
-                text: "user_id",
-                value: "user"
-            }, {
                 text: "Action",
                 value: "actions"
             }],
             page: 1,
-            maxPage: 3,
+            maxPage: 11,
             search: "",
             form: {},
             dialog: false,
@@ -95,7 +116,8 @@ export default {
     },
     methods: {
         async startup() {
-            this.items = await Core.getHttp(`/api/adminindicator/order/?page=${this.page}&search=${this.search}`);
+            this.items = await Core.getHttp(`/api/indicator/order/?page=${this.page}&search=${this.search}`);
+
             await this.closeDialog()
         },
         async store() {

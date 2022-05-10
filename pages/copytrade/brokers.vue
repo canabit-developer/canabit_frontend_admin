@@ -1,8 +1,3 @@
-api
-
-table
- Create
-
 <template>
 <div>
     <Bg-User></Bg-User>
@@ -22,10 +17,13 @@ table
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
-
+            <template v-slot:item.image="{ item }">
+                <div class="p-4"><img :src="$url+item.image" class="w-20 h-auto shadow-xl" /></div>
+            </template>
+    <template v-slot:item.is_active="{ item }">
+                <UI-IsActive :active="item.is_active"></UI-IsActive>
+            </template>
         </v-data-table>
-        <v-pagination v-model="page" :length="items.count/maxPage"></v-pagination>
-
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
@@ -37,15 +35,15 @@ table
                 </v-card-title>
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
-                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="code" hide-details></v-text-field>
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.discount" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="discount" hide-details></v-text-field>
 
-                        <v-checkbox v-model="form.is_active" label="is_active"></v-checkbox>
-                        <v-text-field v-model="form.is_point" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="is_point" hide-details></v-text-field>
-                        <v-text-field v-model="form.link_to" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="link_to" hide-details></v-text-field>
+                        <br><br><span>image</span><input ref="copytrade_brokerinproduct_image" type="file"><br><br>
+                 
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="name" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
+                               <v-text-field v-model="form.link" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="link" hide-details></v-text-field>
+                        <v-text-field disabled v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
+
+                        <v-text-field disabled v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
+                        <v-checkbox v-model="form.is_active" label="is_active"></v-checkbox>
 
                         <div class="mt-4 flex">
                             <v-spacer />
@@ -69,36 +67,33 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "code",
-                value: "code"
-            }, {
-                text: "created_at",
-                value: "created_at"
-            }, {
-                text: "discount",
-                value: "discount"
-            }, {
-                text: "id",
-                value: "id"
-            }, {
-                text: "is_active",
-                value: "is_active"
-            }, {
-                text: "is_point",
-                value: "is_point"
-            }, {
-                text: "link_to",
-                value: "link_to"
-            }, {
-                text: "name",
-                value: "name"
-            }, {
-                text: "updated_at",
-                value: "updated_at"
-            }, {
-                text: "Action",
-                value: "actions"
-            }],
+                    text: "id",
+                    value: "id"
+                }, {
+                    text: "image",
+                    value: "image"
+                }, {
+                    text: "name",
+                    value: "name"
+                }, {
+                    text: "link",
+                    value: "link"
+                },
+                {
+                    text: "created_at",
+                    value: "created_at"
+                },
+                {
+                    text: "updated_at",
+                    value: "updated_at"
+                },{
+                    text: "is_active",
+                    value: "is_active"
+                },  {
+                    text: "Action",
+                    value: "actions"
+                }
+            ],
             page: 1,
             maxPage: 3,
             search: "",
@@ -112,38 +107,41 @@ export default {
     },
     methods: {
         async startup() {
-            this.items = await Core.getHttp(`/api/webconfig/promotion/?page=${this.page}&search=${this.search}`);
+            this.items = await Core.getHttp(`/api/copytrade/brokerinproduct/?search=${this.search}`);
             await this.closeDialog()
         },
         async store() {
-            let data = await Core.postHttpAlert(`/api/webconfig/promotion/`, this.form)
+            let data = await Core.postHttpAlert(`/api/copytrade/brokerinproduct/`, this.form)
             if (data.id) {
                 await this.updateImage(data.id)
                 await this.startup();
             }
         },
         async updateImage(id) {
-            let image = this.$refs.webconfig_promotion_image.files[0]
+            let image = this.$refs.copytrade_brokerinproduct_image.files[0]
             if (image) {
                 let formData = new FormData()
                 formData.append("image", image);
-                let update = await Core.putImageHttp(`/api/webconfig/promotion/${id}/`, formData)
+                let update = await Core.putImageHttp(`/api/copytrade/brokerinproduct/${id}/`, formData)
             }
         },
         async update() {
             delete this.form.image
-            let data = await Core.putHttpAlert(`/api/webconfig/promotion/${this.form.id}/`, this.form)
+            let data = await Core.putHttpAlert(`/api/copytrade/brokerinproduct/${this.form.id}/`, this.form)
+            if(data.id){
+                  await this.updateImage(data.id)
+            } 
             await this.startup();
         },
         async deleteData(id) {
-            let data = await Core.deleteHttpAlert(`/api/webconfig/promotion/${id}/`)
+            let data = await Core.deleteHttpAlert(`/api/copytrade/brokerinproduct/${id}/`)
             await this.startup();
         },
         async openDialog() {
             this.dialog = true;
         },
         async openDialogUpdate(id) {
-            this.form = await Core.getHttp(`/api/webconfig/promotion/${id}/`)
+            this.form = await Core.getHttp(`/api/copytrade/brokerinproduct/${id}/`)
             this.dialog = true;
         },
         async closeDialog() {

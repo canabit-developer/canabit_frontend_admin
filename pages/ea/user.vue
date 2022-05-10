@@ -136,21 +136,7 @@ export default {
                 }, {
                     text: "updated_at",
                     value: "updated_at"
-                },
-                // {
-                //     text: "account_type",
-                //     value: "account_type"
-                // }, 
-                // {
-                //     text: "broker",
-                //     value: "broker"
-                // }, {
-                //     text: "product",
-                //     value: "product"
-                // }, {
-                //     text: "promotion",
-                //     value: "promotion"
-                // }, 
+                }, 
                 {
                     text: "Action",
                     value: "actions"
@@ -206,7 +192,7 @@ export default {
                 if (this.form.status == 1 || this.form.status == 2) {
                     await Core.sentEmail(`สถานะการสั่งซื้อ EA :${this.form.product_name}`, this.form.user_data.email, `
                         <h3>สถานะการสั่งซื้อ EA :${this.form.product_name} : ${statusTxt} </h3>
-                        <h4>เหตุผล : ${this.form.remark} </h4>
+                        <h4>เหตุผล : ${(this.form.remark)?this.form.remark:'-'} </h4>
                         `)
                 }
 
