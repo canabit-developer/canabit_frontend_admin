@@ -5,7 +5,7 @@
         <v-toolbar flat color="transparent">
             <h2 class="text-3xl font-semibold"> <v-icon class="mr-2">em em-loudspeaker</v-icon> Promotion </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">เพิ่มชื่อโปรโมชั่น</v-btn>
+            <v-btn @click="openDialog()"><v-icon class="mr-2 " > em em-file_folder</v-icon>เพิ่มชื่อโปรโมชั่น</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">

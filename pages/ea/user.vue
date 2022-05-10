@@ -2,8 +2,9 @@
 <div>
     <Bg-User></Bg-User>
     <div class="relative">
-        <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> </h2>
+        <v-toolbar flat color="transparent"><h2 class="text-3xl font-semibold">
+                <v-icon>em em-busts_in_silhouette</v-icon> User
+            </h2>
             <v-spacer></v-spacer>
             <!-- <v-btn @click="openDialog()">Add Data</v-btn> -->
         </v-toolbar>
@@ -72,7 +73,7 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    {{(form.id)?"แก้ไข":"สร้าง"}}ข้อมูล
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -81,10 +82,10 @@
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
                         <v-select outlined item-text="name" item-value="val" :items="[{val:0,name:'รออนุมัติ'},{val:1,name:'อนุมัติ'},{val:2,name:'ไม่อนุมัติ'}]" v-model="form.status" label="อัพเดทสถานะ"></v-select>
-                        <v-textarea v-model="form.remark" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="remark" hide-details></v-textarea>
+                        <v-textarea v-model="form.remark" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="หมายเหตุ" hide-details></v-textarea>
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success">บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -107,38 +108,38 @@ export default {
         return {
             items: [],
             headers: [{
-                    text: "id",
+                    text: "ลำดับ",
                     value: "id"
                 }, {
-                    text: "code",
+                    text: "รหัสสินค้า",
                     value: "code"
                 }, {
-                    text: "user",
+                    text: "ผู้ใช้",
                     value: "user"
                 }, {
-                    text: "status",
+                    text: "สถานะ",
                     value: "status"
                 },
                 {
-                    text: "use_point",
+                    text: "point ของผู้ใช้",
                     value: "use_point"
                 }, {
-                    text: "use_promotion",
+                    text: "โปรโมชั่น",
                     value: "use_promotion"
                 },
                 {
-                    text: "remark",
+                    text: "หมายเหตุ",
                     value: "remark"
                 },
                 {
-                    text: "created_at",
+                    text: "วันที่สร้าง",
                     value: "created_at"
                 }, {
-                    text: "updated_at",
+                    text: "วันที่อัพเดท",
                     value: "updated_at"
                 }, 
                 {
-                    text: "Action",
+                    text: "การจัดการ",
                     value: "actions"
                 }
             ],

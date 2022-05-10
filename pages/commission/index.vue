@@ -6,7 +6,7 @@
             <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-moneybag</v-icon> Commissiom </h2>
             <h2 class="text-3xl font-semibold"> </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">คอมมิชชั่น</v-btn>
+            <v-btn @click="openDialog()"><v-icon class="mr-2 " > em em-file_folder</v-icon>คอมมิชชั่น</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
@@ -44,7 +44,7 @@
 
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success">บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>

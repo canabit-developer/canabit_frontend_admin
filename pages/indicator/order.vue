@@ -3,9 +3,9 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> </h2>
+            <h2 class="text-3xl font-semibold"><v-icon class="mr-2" >em em-arrow_double_down</v-icon> Indicator Detail</h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">Add Data</v-btn>
+            <v-btn @click="openDialog()"><v-icon class="mr-2 " > em em-file_folder</v-icon>เพิ่มข้อมูล</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table   :headers="headers" :items="items" class="elevation-1">
@@ -48,7 +48,7 @@
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
             <v-card>
                 <v-card-title primary-title>
-                    {{(form.id)?"Update":"Create"}} Data
+                    {{(form.id)?"แก้ไข":"สร้าง"}}ข้อมูล
                     <v-spacer></v-spacer>
                     <v-btn @click="closeDialog()" text color="error">
                         <v-icon>mdi-close</v-icon>
@@ -57,15 +57,13 @@
                 <v-card-text>
                     <form @submit.prevent="(form.id)?update():store()">
 
-                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="code" hide-details></v-text-field>
-                        <v-text-field v-model="form.created_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="created_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.updated_at" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="updated_at" hide-details></v-text-field>
-                        <v-text-field v-model="form.product_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="product_id" hide-details></v-text-field>
-                        <v-text-field v-model="form.user_id" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="user_id" hide-details></v-text-field>
+                        <v-text-field v-model="form.code" class="mt-4" prepend-inner-icon="em em-basket" outlined label="รหัสสินค้า" hide-details></v-text-field>
+                        <v-text-field v-model="form.product_id" class="mt-4" prepend-inner-icon="em em-basket" outlined label="สินค้า" hide-details></v-text-field>
+                        <v-text-field v-model="form.user_id" class="mt-4" prepend-inner-icon="em-busts_in_silhouette" outlined label="ผู้ใช้" hide-details></v-text-field>
 
                         <div class="mt-4 flex">
                             <v-spacer />
-                            <v-btn type="submit" color="success">Submit</v-btn>
+                            <v-btn type="submit" color="success">บันทึกข้อมูล</v-btn>
                         </div>
                     </form>
                 </v-card-text>
@@ -85,22 +83,22 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ลำดับ",
                 value: "id"
             }, {
-                text: "code",
+                text: "รหัสสินค้า",
                 value: "code"
             }, {
-                text: "user_id",
+                text: "ผู้ใช้",
                 value: "user"
             }, {
-                text: "created_at",
+                text: "วันที่สร้าง",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "วันที่อัพเดท",
                 value: "updated_at"
             }, {
-                text: "Action",
+                text: "การจัดการ",
                 value: "actions"
             }],
             page: 1,

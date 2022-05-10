@@ -4,9 +4,9 @@
     <div class="relative">
         <v-toolbar flat color="transparent">
             <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-credit_card</v-icon> Tier </h2>
-            <h2 class="text-3xl font-semibold"> </h2>
+
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()">เพิ่มเทียร์</v-btn>
+            <v-btn @click="openDialog()"><v-icon>em em-busts_in_silhouette</v-icon>เพิ่มเทียร์</v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
