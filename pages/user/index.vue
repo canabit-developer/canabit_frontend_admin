@@ -86,8 +86,8 @@
                 {{item.address}} {{(item.province)?`จ.${item.province}`:``}} {{(item.amphur)?`อ.${item.amphur}`:``}} {{(item.district)?`ต.${item.district}`:``}} {{item.zipcode}}
             </template>
             <template v-slot:item.permission="{ item }">
-                <UI-IsChecks text="Admin" :active="item.is_superuser"></UI-IsChecks>
-                <UI-IsChecks text="Staff" :active="item.is_staff"></UI-IsChecks>
+                <UI-IsChecks text="Admin" :active="!item.is_superuser"></UI-IsChecks>
+                <UI-IsChecks text="Staff" :active="!item.is_staff"></UI-IsChecks>
             </template>
             <template v-slot:item.is_active="{ item }">
                 <UI-IsChecks text="ยืนยันอีเมล์" :active="item.is_active"></UI-IsChecks>

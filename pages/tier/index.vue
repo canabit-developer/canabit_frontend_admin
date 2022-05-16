@@ -3,18 +3,22 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-credit_card</v-icon> Tier </h2>
+            <h2 class="text-3xl font-semibold">
+                <v-icon class="mr-4">em em-credit_card</v-icon> Tier
+            </h2>
 
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()"><v-icon>em em-busts_in_silhouette</v-icon>เพิ่มเทียร์</v-btn>
+            <v-btn @click="openDialog()">
+                <v-icon>em em-busts_in_silhouette</v-icon>เพิ่มเทียร์
+            </v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
-                <template v-slot:item.color="{ item }">
-                    <div>
-                        <v-btn small :color="item.color">{{item.color}}</v-btn>
-                    </div>
-                </template>
+            <template v-slot:item.color="{ item }">
+                <div>
+                    <v-btn small :color="item.color">{{item.color}}</v-btn>
+                </div>
+            </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
                     <v-icon>mdi-pencil</v-icon>
@@ -39,11 +43,15 @@
                     <form @submit.prevent="(form.id)?update():store()">
 
                         <v-text-field v-model="form.name" class="mt-4" prepend-inner-icon="em em-sports_medal" outlined label="ระบบเทียร์" hide-details></v-text-field>
-                        <v-text-field v-model="form.length" class="mt-4" prepend-inner-icon="em em-registered" outlined label="พ้อย" hide-details></v-text-field>
-                        <br>
+                        <v-text-field type="number" v-model="form.length" class="mt-4" prepend-inner-icon="em em-registered" outlined label="พ้อย" hide-details></v-text-field>
+                        <br> <br>
                         <center>
-                            <v-color-picker v-model="form.color" dot-size="25" swatches-max-height="200"></v-color-picker> 
-                        </center>
+                            <v-color-picker v-model="form.color" dot-size="25" swatches-max-height="200"></v-color-picker>
+                        </center> <br>
+                        <v-text-field v-model="form.color" class="mt-4" prepend-inner-icon="em em-lower_left_paintbrush" outlined label="สี" hide-details></v-text-field>
+
+                        <br>
+
                         <div class="mt-4 flex">
                             <v-spacer />
                             <v-btn type="submit" color="success">บันทึกข้อมูล</v-btn>
@@ -90,7 +98,9 @@ export default {
             page: 1,
             maxPage: 3,
             search: "",
-            form: {},
+            form: {
+                color: '#FF0000'
+            },
             dialog: false,
 
         };
@@ -106,7 +116,7 @@ export default {
         async store() {
             let data = await Core.postHttpAlert(`/api/account/tier/`, this.form)
             if (data.id) {
-                await this.updateImage(data.id)
+                // await this.updateImage(data.id)
                 await this.startup();
             }
         },
@@ -128,6 +138,7 @@ export default {
             await this.startup();
         },
         async openDialog() {
+            this.form.color = '#FF0000'
             this.dialog = true;
         },
         async openDialogUpdate(id) {
