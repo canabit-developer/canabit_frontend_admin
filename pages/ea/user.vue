@@ -29,7 +29,8 @@
             <template v-slot:item.user="{ item }">
                 <div class="flex items-center p-2 ">
                     <div class="ml-2">
-                        <span class="font-semibold"> {{item.user_full}} </span> <br>
+                        <span class="font-semibold"> {{item.user_full}} </span> <br> 
+                          <span class="text-gray-400 font-semibold"> {{item.user_data.email}} </span> <br> 
                         <span class="text-gray-400 text-sm"> <span v-if="item.user_data.phone_number"> เบอร์ {{item.user_data.phone_number}}</span><br>
                             {{item.user_data.address}} {{(item.user_data.province)?`จ.${item.user_data.province}`:``}} {{(item.user_data.amphur)?`อ.${item.user_data.amphur}`:``}} {{(item.user_data.district)?`ต.${item.user_data.district}`:``}} {{item.user_data.zipcode}}</span>
 
@@ -80,7 +81,7 @@
                     </v-btn>
                 </v-card-title>
                 <v-card-text>
-                    <form @submit.prevent="(form.id)?update():store()">
+                    <form @submit.prevent="(form.id)?update():store()"> 
                         <v-select outlined item-text="name" item-value="val" :items="[{val:0,name:'รออนุมัติ'},{val:1,name:'อนุมัติ'},{val:2,name:'ไม่อนุมัติ'}]" v-model="form.status" label="อัพเดทสถานะ"></v-select>
                         <v-textarea v-model="form.remark" class="mt-4" prepend-inner-icon="mdi-account-outline" outlined label="หมายเหตุ" hide-details></v-textarea>
                         <div class="mt-4 flex">
@@ -163,6 +164,7 @@ export default {
             let data = await Core.postHttpAlert(`/api/adminea/order/`, this.form)
             if (data.id) {
                 await this.updateImage(data.id)
+                
                 await this.startup();
             }
         },
