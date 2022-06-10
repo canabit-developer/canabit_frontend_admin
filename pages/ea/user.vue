@@ -33,7 +33,6 @@
                           <span class="text-gray-400 font-semibold"> {{item.user_data.email}} </span> <br> 
                         <span class="text-gray-400 text-sm"> <span v-if="item.user_data.phone_number"> เบอร์ {{item.user_data.phone_number}}</span><br>
                             {{item.user_data.address}} {{(item.user_data.province)?`จ.${item.user_data.province}`:``}} {{(item.user_data.amphur)?`อ.${item.user_data.amphur}`:``}} {{(item.user_data.district)?`ต.${item.user_data.district}`:``}} {{item.user_data.zipcode}}</span>
-
                     </div>
                 </div>
             </template>
