@@ -1,5 +1,5 @@
 <template>
-<v-list-item   :class="activateBg" :dark="activate" @click="$router.push(`${path}`)">
+<v-list-item   :class="activateBg" :dark="activate" @click="$router.push(`${path}`)"  >
     <v-list-item-icon >
         <v-icon   >
             {{ icon || alternateIcon }}

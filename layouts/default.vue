@@ -1,11 +1,11 @@
 <template>
 <v-app class="bg-main" v-if="response">
     <Core-Loading></Core-Loading>
-    <UserMenu-MainMenu></UserMenu-MainMenu>
-    <Test ref="loading" />
+    <UserMenu-MainMenu></UserMenu-MainMenu> 
     <v-main >
         <!-- <Core-Notification /> -->
         <div class="p-10 ">
+             <Bg-Test></Bg-Test>
             <Nuxt />
         </div>
 
@@ -51,8 +51,8 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap');
 *{
-    font-family: 'Noto Sans Thai', sans-serif!important;
+   font-family: 'IBM Plex Sans Thai', sans-serif!important;
 } 
 </style>

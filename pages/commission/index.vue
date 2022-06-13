@@ -3,14 +3,22 @@
     <Bg-User></Bg-User>
     <div class="relative">
         <v-toolbar flat color="transparent">
-            <h2 class="text-3xl font-semibold"> <v-icon class="mr-4">em em-moneybag</v-icon> Commissiom </h2>
+            <h2 class="text-3xl font-semibold">
+                <v-icon class="mr-4">em em-moneybag</v-icon> Commissiom
+            </h2>
             <h2 class="text-3xl font-semibold"> </h2>
             <v-spacer></v-spacer>
-            <v-btn @click="openDialog()"><v-icon class="mr-2 " > em em-file_folder</v-icon>คอมมิชชั่น</v-btn>
+            <v-btn @click="openDialog()">
+                <v-icon class="mr-2 "> em em-file_folder</v-icon>คอมมิชชั่น
+            </v-btn>
         </v-toolbar>
         <v-text-field dense @change="startup()" v-model="search" outlined label="ค้นหา"></v-text-field>
         <v-data-table :headers="headers" :items="items" class="elevation-1">
+            <!-- <template v-slot:item.id="{ item,index }">
+                {{index+1}}
+            </template> -->
             <template v-slot:item.actions="{ item }">
+
                 <v-btn x-small fab class="m-2" @click="openDialogUpdate(item.id)" color="warning">
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn>
@@ -18,7 +26,21 @@
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
+            <template v-slot:item.type_values_master="{ item }">
+                <UI-IsChecks text="" :active="!item.type_values_master"></UI-IsChecks>
+            </template>
+            <template v-slot:item.type_values_child="{ item }">
+                <UI-IsChecks text="" :active="!item.type_values_child"></UI-IsChecks>
+            </template>
+            <template v-slot:item.broker="{ item }">
 
+                <div class="flex items-center p-2">
+                    <img class="shadow-xl rounded-lg w-10 h-10 object-cover" :src="$url+item.broker.image"> <span class="ml-2">{{ item.broker.name }}</span>
+                </div>
+            </template>
+            <template v-slot:item.tier="{ item }">
+                <span class="font-semibold" :style="`color:${item.tier.color};`">{{item.tier.name}}</span>
+            </template>
         </v-data-table>
 
         <v-dialog v-model="dialog" scrollable persistent :overlay="false" max-width="500px" transition="dialog-transition">
@@ -68,10 +90,13 @@ export default {
             items: [],
             headers: [{
                 text: "ลำดับ",
-                value: "id"
+                value: "num"
             }, {
                 text: "ประเภท",
                 value: "types"
+            }, {
+                text: "โบรกเกอร์",
+                value: "broker"
             }, {
                 text: "เพอร์มิชชันมาสเตอร์",
                 value: "type_values_master"
@@ -85,17 +110,14 @@ export default {
                 text: "ค่าคอมมิชชันผู้ต่อใต้",
                 value: "child"
             }, {
+                text: "ระดับเทียร์",
+                value: "tier"
+            }, {
                 text: "วันที่สร้าง",
                 value: "created_at"
             }, {
                 text: "วันที่อัพเดท",
-                value: "updated_at"    
-            }, {
-                text: "โบรกเกอร์",
-                value: "broker"
-            }, {
-                text: "ระดับเทียร์",
-                value: "tier"
+                value: "updated_at"
             }, {
                 text: "การจัดการ",
                 value: "actions"
@@ -112,14 +134,39 @@ export default {
         await this.startup();
     },
     methods: {
+        getTiersById(id) {
+            try {
+                return _.find(this.tiers, {
+                    id: id
+                })
+            } catch (error) {
+                return null
+            }
+        },
+        getBrokerById(id) {
+            try {
+                return _.find(this.brokers, {
+                    id: id
+                })
+            } catch (error) {
+                return null
+            }
+        },
         async startup() {
             this.items = await Core.getHttp(`/api/commission/admincommision/?page=${this.page}&search=${this.search}`);
+            this.items = _.map(this.items, (r,index) => {
+                let item = r
+                item.num = index+1
+                item.broker = this.getBrokerById(item.broker)
+                item.tier = this.getTiersById(item.tier)
+                return item
+            })
             await this.closeDialog()
         },
         async store() {
             let data = await Core.postHttpAlert(`/api/commission/admincommision/`, this.form)
             if (data.id) {
-               // await this.updateImage(data.id)
+                // await this.updateImage(data.id)
                 await this.startup();
             }
         },

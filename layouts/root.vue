@@ -29,8 +29,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai&display=swap');
 *{
-    font-family: 'Noto Sans Thai', sans-serif!important;
+   font-family: 'IBM Plex Sans Thai', sans-serif!important;
 } 
 </style>

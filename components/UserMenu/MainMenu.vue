@@ -12,7 +12,7 @@
         </div>
     </v-app-bar>  -->
 
-    <v-navigation-drawer app v-model="isDrawerOpen">
+    <v-navigation-drawer app v-model="isDrawerOpen" width="300">
         <div class="vertical-nav-header d-flex items-center ps-6 pe-5 pt-5 pb-2">
             <router-link to="/" class="d-flex align-center text-decoration-none w-full">
                 <center>
@@ -41,8 +41,14 @@
             <UserMenu-NavbarLink path="/kyc" title="kyc" icon="em em-clipboard"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/tier" title="tier" icon="em em-credit_card"></UserMenu-NavbarLink>
             <UserMenu-NavbarLink path="/commission" title="commission" icon="em em-moneybag"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/broker" title="Broker" icon="em em-bank"></UserMenu-NavbarLink>
-            <UserMenu-NavbarLink path="/store" title="store" icon="em em-trophy"></UserMenu-NavbarLink>
+               <UserMenu-NavMenuGroup icon="em em-trophy" title="Store&Reward">
+                <UserMenu-NavbarLink class="ml-4" path="/store" title="Store" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink class="ml-4" path="/vote" title="Reward" icon="em em-trophy"></UserMenu-NavbarLink>
+            </UserMenu-NavMenuGroup> 
+            <UserMenu-NavMenuGroup icon="em em-chart" title="Brokers">
+                <UserMenu-NavbarLink class="ml-4" path="/broker" title="Broker" icon="em em-shopping_trolley"></UserMenu-NavbarLink>
+                <UserMenu-NavbarLink class="ml-4" path="/broker/user/" title="user" icon="em em-busts_in_silhouette"></UserMenu-NavbarLink>
+            </UserMenu-NavMenuGroup>
             <v-divider></v-divider>
             <UserMenu-NavbarLink path="/promotion" title="Promotion" icon="em em-loudspeaker"></UserMenu-NavbarLink>
             <UserMenu-NavMenuGroup icon="em em-chart" title="EA">
