@@ -108,31 +108,31 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ID",
                 value: "id"
             }, {
-                text: "store_a",
+                text: "Store_A",
                 value: "store_a"
             }, {
-                text: "store_b",
+                text: "Store_B",
                 value: "store_b"
             }, {
-                text: "point_use",
+                text: "Point",
                 value: "point_use"
             }, {
-                text: "times",
+                text: "Times",
                 value: "times"
             }, {
-                text: "created_at",
+                text: "Created",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "Updated",
                 value: "updated_at"
             }, {
-                text: "is_active",
+                text: "Active",
                 value: "is_active"
             }, {
-                text: "is_ending",
+                text: "Ending",
                 value: "is_ending"
             }, {
                 text: "Action",

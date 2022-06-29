@@ -92,7 +92,7 @@ export default {
                 value: "updated_at"
 
             }, {
-                text: "ที่อยู่ url",
+                text: "URL",
                 value: "link"
             }, {
                 text: "การจัดการ",

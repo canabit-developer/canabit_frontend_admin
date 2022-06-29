@@ -93,28 +93,28 @@ export default {
         return {
             items: [],
             headers: [{
-                text: "id",
+                text: "ID",
                 value: "id"
             }, {
-                text: "broker_no",
+                text: "Broker",
                 value: "broker_no"
             },  {
-                text: "account_no",
+                text: "Account",
                 value: "account_no"
             }, {
-                text: "user_id",
+                text: "User",
                 value: "user"
             }, {
-                text: "status",
+                text: "Status",
                 value: "status"
             }, {
-                text: "remark",
+                text: "Remark",
                 value: "remark"
             }, {
-                text: "created_at",
+                text: "Created",
                 value: "created_at"
             }, {
-                text: "updated_at",
+                text: "Updated",
                 value: "updated_at"
             }, {
                 text: "Action",

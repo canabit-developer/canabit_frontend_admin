@@ -75,7 +75,7 @@ export default {
                     text: "ชื่อ Broker",
                     value: "name"
                 }, {
-                    text: " ที่อยู่ url",
+                    text: " URL",
                     value: "link"
                 },
                 {

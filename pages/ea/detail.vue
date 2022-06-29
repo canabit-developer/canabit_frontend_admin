@@ -117,7 +117,7 @@ export default {
                 text: "ชื่อผู้ใช้",
                 value: "user_full"
             }, {
-                text: "ที่อยู่ url",
+                text: "URL",
                 value: "link"
             }, {
                 text: "วันที่สร้าง",
