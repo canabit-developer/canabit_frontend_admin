@@ -6,7 +6,7 @@ import axios from "axios";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let config = {
-  baseURL: process.env.baseURL || process.env.apiUrl ||  "http://192.168.0.117:8001"  //"https://www.admin-canabit.tk" //
+  baseURL: process.env.baseURL || process.env.apiUrl ||  "https://api.dev-canabit.xyz"  //"https://www.admin-canabit.tk" //
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
