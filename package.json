@@ -1,12 +1,12 @@
 {
-    "name": "opulentz-frontend",
+    "name": "canabit-frontend-admin",
     "version": "1.0.0",
     "private": true,
     "scripts": {
         "dev": "nuxt",
         "build": "nuxt build",
         "start": "nuxt start",
-        "deploy": "npm run build && npm run generate",
+        "deploy": "nuxt build && nuxt start",
         "generate": "nuxt generate",
         "upload": "npm run build && npm run generate &&  gh-pages -d dist -t true"
     },
