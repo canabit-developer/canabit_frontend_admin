@@ -6,7 +6,7 @@
         "dev": "nuxt",
         "build": "nuxt build",
         "start": "nuxt start",
-        "deploy": "npm cache clean --force && npm install && nuxt build && nuxt start",
+        "deploy": "npm cache clean --force && npm install --save nuxt && nuxt build && nuxt start",
         "generate": "nuxt generate",
         "upload": "npm run build && npm run generate &&  gh-pages -d dist -t true"
     },
